@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".NetworkActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:style="?android:attr/buttonBarStyle" >
+         >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +22,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
                 android:text="@string/buttonNetworkList" />
 
             <Button
@@ -30,7 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
                 android:text="@string/buttonNetworkJoined" />
 
         </LinearLayout>
@@ -42,45 +40,19 @@
             tools:listitem="@layout/network_item_list">
 
         </android.support.v7.widget.RecyclerView>
-
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:style="?android:attr/buttonBarStyle">
+            android:layout_gravity="bottom">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
-                android:text="@string/buttonNews" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
-                android:text="@string/buttonShop" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
-                android:text="@string/buttonAdds" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:style="?android:attr/buttonBarButtonStyle"
-                android:text="@string/buttonProfile" />
-        </LinearLayout>
+            <fragment
+                android:id="@+id/list"
+                class="com.example.homre.smartcity.NavigationFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"></fragment>
+        </FrameLayout>
 
     </LinearLayout>
 

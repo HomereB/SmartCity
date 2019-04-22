@@ -7,8 +7,8 @@
 
     <string name="buttonAdds">Promo</string>
     <string name="buttonNews">Actus</string>
-    <string name="buttonShop">Magasins</string>
-    <string name="buttonNetwork">Reseaux</string>
+    <string name="buttonShop">Mags</string>
+    <string name="buttonNetwork">R.S.</string>
     <string name="buttonProfile">Profil</string>
 
     <!-- boutons actus-->
