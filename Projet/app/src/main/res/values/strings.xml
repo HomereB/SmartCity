@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">SmartCity</string>
+
+                                                            <!--    BOUTONS    -->
+
+    <!-- boutons navigation-->
+
+    <string name="buttonAdds">Promo</string>
+    <string name="buttonNews">Actus</string>
+    <string name="buttonShop">Magasins</string>
+    <string name="buttonNetwork">Reseaux</string>
+    <string name="buttonProfile">Profil</string>
+
+    <!-- boutons actus-->
+
+    <string name="buttonNewsPersonal">Perso</string>
+    <string name="buttonNewsCity">Ville</string>
+
+    <!-- boutons réso-->
+
+    <string name="buttonNetworkList">Tous</string>
+    <string name="buttonNetworkJoined">Rejoints</string>
+
+    <!-- boutons réso select-->
+
+    <string name="buttonNetworkSelectedJoin">Rejoindre</string>
+    <string name="buttonNetworkSelectedQuit">Quitter</string>
+
+    <!-- boutons magasins-->
+
+    <string name="buttonShopAlphabet">Annuaire</string>
+    <string name="buttonShopProximity">Proches</string>
+
+
+                                                                <!--    TEXTES    -->
+
+    <!-- Profil -->
+
+    <string name="txtProfilePseudo">Pseudo :</string>
+    <string name="txtProfileEmail">Adresse mail :</string>
+    <string name="txtProfileCity">Ville :</string>
+    <string name="txtProfileDescription">Description :</string>
+    <string name="txtProfileInterest">Centre d\'interets :</string>
+
+    <!-- Reso -->
+
+    <string name="txtNetworkName">Pseudo :</string>
+    <string name="txtNetworkOwner">Appartient à :</string>
+    <string name="txtNetworkCity">Ville :</string>
+
+
+
+
+
 </resources>
