@@ -19,6 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.homre.smartcity.BDD.Actualite;
+import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Publicite;
 import com.example.homre.smartcity.BDD.PubliciteSQL;
@@ -42,15 +44,6 @@ public class NewsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-       FrameLayout frame = new FrameLayout(this);
-        setContentView(frame, new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-
-        Fragment mainFragment= new NavigationFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-        ft.add(android.R.id.content, mainFragment).commit();
-
         imageView = (ImageView)findViewById(R.id.imageView);
         tv = (TextView) findViewById(R.id.text);
 
@@ -64,13 +57,14 @@ public class NewsActivity extends FragmentActivity {
 
     }
 
-    private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<Publicite>> {
+    private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<Actualite>> {
         ArrayList<Bitmap> bitmaps;
         @Override
-        protected ArrayList<Publicite> doInBackground(String... urls) {
+        protected ArrayList<Actualite> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            ArrayList<Publicite> p = PubliciteSQL.selectAll();
+            //TODO choix de la ville via donne de l utilisateur
+            ArrayList<Actualite> p = ActualiteSQL.selectByVille("Montpellier");
             bitmaps = new ArrayList<>();
             try{
                 for(int j=0;j<p.size();j++){
@@ -88,14 +82,14 @@ public class NewsActivity extends FragmentActivity {
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
-        protected void onPostExecute(ArrayList<Publicite> pubs) {
+        protected void onPostExecute(ArrayList<Actualite> actus) {
 
             //TODO Faire l'affichage
-            Log.i("smart",""+bitmaps.get(0).getByteCount());
-            imageView.setImageBitmap(bitmaps.get(0));
-            imageView.setVisibility(View.VISIBLE);
+            Log.i("smart",""+bitmaps.size());
+            //imageView.setImageBitmap(bitmaps.get(0));
+            //imageView.setVisibility(View.VISIBLE);
 
-            tv.setText(pubs.get(0).getNomCommerce());
+            //tv.setText(actus.get(0).getTitre());
         }
     }
 }
