@@ -45,4 +45,8 @@ public class ReseauSocial {
     public String getIdOwner(){
         return idOwner;
     }
+
+    public String getPrivacy() {if (isPublic)
+                                    return "public";
+                                return "prive";}
 }

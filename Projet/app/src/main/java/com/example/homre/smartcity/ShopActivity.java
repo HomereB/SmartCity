@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Commerces;
 import com.example.homre.smartcity.BDD.CommercesSQL;
+import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Shops;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -65,7 +68,6 @@ public class ShopActivity extends FragmentActivity {
                     Log.e("smart",url.toString());
                     bitmaps.add(BitmapFactory.decodeStream(url.openConnection().getInputStream()));
                 }
-
             }catch (MalformedURLException e){
                 Log.e("smart",e.toString());
             } catch (IOException e){
@@ -73,11 +75,19 @@ public class ShopActivity extends FragmentActivity {
             }
             return p;
         }
+
+
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<Commerces> commerces) {
 
             //TODO Faire l'affichage
+            Log.i("smart",""+bitmaps.size());
+            RecyclerView rv = findViewById(R.id.RVshops);
+            Adapter_Shops adapter = new Adapter_Shops(commerces,bitmaps,getApplication());
+            rv.setAdapter(adapter);
+            rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             Log.i("smart",""+bitmaps.size());
             //imageView.setImageBitmap(bitmaps.get(0));
             //imageView.setVisibility(View.VISIBLE);

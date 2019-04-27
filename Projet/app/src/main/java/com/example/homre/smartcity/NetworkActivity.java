@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.ReseauSocial;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
+import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,7 +45,6 @@ public class NetworkActivity extends FragmentActivity{
         } else {
             tv.setText("No network connection available.");
         }
-
     }
 
     private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<ReseauSocial>> {
@@ -61,6 +63,10 @@ public class NetworkActivity extends FragmentActivity{
 
             //TODO Faire l'affichage
             Log.i("smart",""+reseauSocials.size());
+            RecyclerView rv = findViewById(R.id.RVNetwork);
+            Adapter_Network adapter = new Adapter_Network(reseauSocials,getApplication());
+            rv.setAdapter(adapter);
+            rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             //imageView.setImageBitmap(bitmaps.get(0));
             //imageView.setVisibility(View.VISIBLE);
 

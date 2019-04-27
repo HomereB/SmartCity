@@ -34,6 +34,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVNetwork"
             android:layout_width="match_parent"
             android:layout_height="413dp"
             android:clipToPadding="false"

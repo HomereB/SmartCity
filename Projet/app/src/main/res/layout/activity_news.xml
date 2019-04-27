@@ -38,12 +38,9 @@
 
                 android:text="+" />
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/text"/>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVNews"
             android:layout_width="match_parent"
             android:layout_height="413dp"
             android:clipToPadding="false"

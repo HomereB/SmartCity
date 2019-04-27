@@ -50,8 +50,8 @@ public class PubActivity extends FragmentActivity {
 
         ft.add(android.R.id.content, mainFragment).commit();
 
-        imageView = (ImageView)findViewById(R.id.imageView);
-        tv = (TextView) findViewById(R.id.text);
+        imageView = (ImageView)findViewById(R.id.imageViewAdds);
+        tv = (TextView) findViewById(R.id.textAdds);
 
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -91,6 +91,7 @@ public class PubActivity extends FragmentActivity {
 
             //TODO Faire l'affichage
             Log.i("smart",""+bitmaps.get(0).getByteCount());
+            Log.i("smart",""+bitmaps.size());
             imageView.setImageBitmap(bitmaps.get(0));
             imageView.setVisibility(View.VISIBLE);
 

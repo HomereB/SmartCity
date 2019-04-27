@@ -21,6 +21,7 @@ public class Actualite {
     private String titre;
     private String texte;
     private String img;
+    private String categorie;
 
     public Actualite(JSONObject data){
         try{
@@ -30,6 +31,7 @@ public class Actualite {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(data.getString("date"));
             titre=data.getString("titre");
             texte=data.getString("description");
+            categorie = "a remplir";
         }catch (JSONException e){
             Log.e("json","error parsing data : "+e.toString());
         }catch (ParseException e){
@@ -45,7 +47,7 @@ public class Actualite {
         return ville;
     }
 
-    public Date date(){
+    public Date getDate(){
         return date;
     }
 
@@ -60,4 +62,6 @@ public class Actualite {
     public String getImg(){
         return img;
     }
+
+    public String getCategorie() {return categorie;}
 }

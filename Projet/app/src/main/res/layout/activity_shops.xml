@@ -32,8 +32,9 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVshops"
             android:layout_width="match_parent"
-            android:layout_height="413dp"
+            android:layout_height="410dp"
             android:clipToPadding="false"
             tools:listitem="@layout/shop_item_list">
 

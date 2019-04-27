@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Publicite;
 import com.example.homre.smartcity.BDD.PubliciteSQL;
+import com.example.homre.smartcity.RecyclerViewRessources.Adapter_News;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -86,6 +89,10 @@ public class NewsActivity extends FragmentActivity {
 
             //TODO Faire l'affichage
             Log.i("smart",""+bitmaps.size());
+            RecyclerView rv = findViewById(R.id.RVNews);
+            Adapter_News adapter = new Adapter_News(actus,bitmaps,getApplication());
+            rv.setAdapter(adapter);
+            rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             //imageView.setImageBitmap(bitmaps.get(0));
             //imageView.setVisibility(View.VISIBLE);
 

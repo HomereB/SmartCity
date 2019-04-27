@@ -16,14 +16,18 @@
             android:layout_height="245dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewAdds"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:srcCompat="@android:drawable/screen_background_dark" />
         </HorizontalScrollView>
-
+        <TextView
+            android:id="@+id/textAdds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
         <VideoView
-            android:id="@+id/videoView"
+            android:id="@+id/videoViewAdds"
             android:layout_width="match_parent"
             android:layout_height="220dp" />
         <FrameLayout
