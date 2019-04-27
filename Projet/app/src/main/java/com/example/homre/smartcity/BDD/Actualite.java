@@ -31,7 +31,7 @@ public class Actualite {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(data.getString("date"));
             titre=data.getString("titre");
             texte=data.getString("description");
-            categorie = "a remplir";
+            categorie = data.getString("nomCategorie");
         }catch (JSONException e){
             Log.e("json","error parsing data : "+e.toString());
         }catch (ParseException e){

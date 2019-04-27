@@ -19,6 +19,7 @@ public class Commerces {
     private String img;
     private double longitude;
     private double latitude;
+    private String adresse;
 
     public Commerces(JSONObject data){
         try{
@@ -30,6 +31,7 @@ public class Commerces {
             img=data.getString("img");
             longitude=data.getDouble("longitude");
             latitude=data.getDouble("latitude");
+            adresse=data.getString("adresse");  
         }catch (JSONException e){
             Log.e("json","error parsing data : "+e.toString());
         }
