@@ -23,7 +23,7 @@ public class ReseauSocial {
         try{
             id=data.getInt("id");
             nom=data.getString("nom");
-            isPublic=data.getBoolean("isPublic");
+            isPublic=data.getString("isPublic").equals("1");
             idOwner=data.getString("idOwner");
         }catch (JSONException e){
             Log.e("json","error parsing data : "+e.toString());

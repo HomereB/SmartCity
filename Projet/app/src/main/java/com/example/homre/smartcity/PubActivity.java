@@ -41,6 +41,9 @@ public class PubActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adds);
 
+        imageView = (ImageView)findViewById(R.id.imageViewAdds);
+        tv = (TextView) findViewById(R.id.textAdds);
+
         FrameLayout frame = new FrameLayout(this);
         setContentView(frame, new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
@@ -50,8 +53,6 @@ public class PubActivity extends FragmentActivity {
 
         ft.add(android.R.id.content, mainFragment).commit();
 
-        imageView = (ImageView)findViewById(R.id.imageViewAdds);
-        tv = (TextView) findViewById(R.id.textAdds);
 
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();

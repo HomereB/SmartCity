@@ -62,7 +62,7 @@ public class NetworkActivity extends FragmentActivity{
         protected void onPostExecute(ArrayList<ReseauSocial> reseauSocials) {
 
             //TODO Faire l'affichage
-            Log.i("smart",""+reseauSocials.size());
+            Log.i("smart",""+reseauSocials.get(0).getIdOwner());
             RecyclerView rv = findViewById(R.id.RVNetwork);
             Adapter_Network adapter = new Adapter_Network(reseauSocials,getApplication());
             rv.setAdapter(adapter);
