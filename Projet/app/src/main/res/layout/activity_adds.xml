@@ -11,38 +11,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <HorizontalScrollView
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerAdds"
             android:layout_width="match_parent"
-            android:layout_height="245dp">
+            android:layout_height="233dp" />
 
-            <ImageView
-                android:id="@+id/imageViewAdds"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/screen_background_dark" />
-        </HorizontalScrollView>
+
         <TextView
             android:id="@+id/textAdds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <VideoView
             android:id="@+id/videoViewAdds"
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="210dp" />
+
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom">
-
+            android:layout_height="match_parent">
             <fragment
                 android:id="@+id/list"
                 class="com.example.homre.smartcity.NavigationFragment"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"></fragment>
         </FrameLayout>
+
 
     </LinearLayout>
 

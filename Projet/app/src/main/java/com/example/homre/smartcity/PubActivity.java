@@ -10,17 +10,20 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Publicite;
 import com.example.homre.smartcity.BDD.PubliciteSQL;
+import com.example.homre.smartcity.RecyclerViewRessources.Adapter_ViewPager_Adds;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -30,12 +33,9 @@ import java.util.ArrayList;
 public class PubActivity extends FragmentActivity {
 
 
-    private Button buttonAnnuaire;
-    private Button buttonProxi;
-
     TextView tv;
     ImageView imageView;
-
+    ViewPager vp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,15 +43,16 @@ public class PubActivity extends FragmentActivity {
 
         imageView = (ImageView)findViewById(R.id.imageViewAdds);
         tv = (TextView) findViewById(R.id.textAdds);
+        vp = (ViewPager) findViewById(R.id.viewPagerAdds);
 
-        FrameLayout frame = new FrameLayout(this);
+/*        FrameLayout frame = new FrameLayout(this);
         setContentView(frame, new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 
         Fragment mainFragment= new NavigationFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-        ft.add(android.R.id.content, mainFragment).commit();
+        ft.add(android.R.id.content, mainFragment).commit();*/
 
 
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -89,14 +90,14 @@ public class PubActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<Publicite> pubs) {
-
             //TODO Faire l'affichage
-            Log.i("smart",""+bitmaps.get(0).getByteCount());
-            Log.i("smart",""+bitmaps.size());
-            imageView.setImageBitmap(bitmaps.get(0));
-            imageView.setVisibility(View.VISIBLE);
 
-            tv.setText(pubs.get(0).getNomCommerce());
+            Adapter_ViewPager_Adds mCustomPagerAdapter = new Adapter_ViewPager_Adds(getApplicationContext(), bitmaps);
+            vp.setAdapter(mCustomPagerAdapter);
+
+
+
+            //tv.setText(pubs.get(0).getNomCommerce());
         }
     }
 }
