@@ -70,12 +70,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="167dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <CheckBox
                     android:id="@+id/checkBox"
@@ -106,8 +106,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="CheckBox" />
+
+                <CheckBox
+                    android:id="@+id/checkBox6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CheckBox" />
+
+                <CheckBox
+                    android:id="@+id/checkBox7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CheckBox" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CheckBox" />
             </LinearLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/buttonProfileApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonProfilValider" />
+
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"

@@ -31,6 +31,10 @@
     <string name="buttonShopAlphabet">Annuaire</string>
     <string name="buttonShopProximity">Proches</string>
 
+    <!-- boutons profil-->
+
+    <string name="buttonProfilValider">Valider</string>
+
 
                                                                 <!--    TEXTES    -->
 
