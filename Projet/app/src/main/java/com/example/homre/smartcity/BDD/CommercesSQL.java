@@ -30,7 +30,11 @@ public class CommercesSQL {
         return commerces;
     }
 
-    public static ArrayList<Commerces> selectByVilleAndCat(String ville, int idCat){
+    public static ArrayList<Commerces> selectByVilleAndCat(String ville, ArrayList<Categorie> Cats){
+        if (Cats.size()==0){
+            return selectByVille(ville);
+        }
+        int idCat = Cats.get(0).getId();
         ArrayList<Commerces> commerces = new ArrayList<>();
         JSONArray jsonArray = BaseDeDonne.SQLQuery("commerces.php?ville="+ville+"&idCategorie="+idCat);
         if (jsonArray!=null){

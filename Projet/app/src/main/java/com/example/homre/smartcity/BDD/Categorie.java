@@ -26,6 +26,11 @@ public class Categorie {
         }
     }
 
+    public Categorie(int identifiant, String name){
+        id=identifiant;
+        nom=name;
+    }
+
     public int getId(){
         return id;
     }
