@@ -33,7 +33,7 @@ public class ReseauSocialSQL {
 
     public static ArrayList<ReseauSocial> selectByUser(String idUser){
         ArrayList<ReseauSocial> reseauSocials = new ArrayList<>();
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("reseaux.php?useri"+idUser);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("reseaux.php?userid="+idUser);
         if (jsonArray!=null){
             try{
                 for (int i=0;i<jsonArray.length();i++){
