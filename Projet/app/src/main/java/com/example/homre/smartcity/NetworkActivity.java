@@ -1,22 +1,26 @@
 package com.example.homre.smartcity;
 
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +53,41 @@ public class NetworkActivity extends FragmentActivity{
         } else {
             tv.setText("No network connection available.");
         }
+
+        //event listener annuaire
+        Button tous = (Button)findViewById(R.id.buttonNetworkAll);
+        tous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    new NetworkActivity.DownloadWebpageTask().execute("dsds");
+                } else {
+                    tv.setText("No network connection available.");
+                }
+            }
+        });
+
+        //event listener proches
+        Button rejoints = (Button)findViewById(R.id.buttonNetworkJoined);
+
+            rejoints.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                    if (networkInfo != null && networkInfo.isConnected()) {
+
+                        new NetworkActivity.DownloadWebpageTask().execute("orderByLocation");
+                    } else {
+                        tv.setText("No network connection available.");
+                    }
+                }
+            });
+
+
+
     }
 
     private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<ReseauSocial>> {
