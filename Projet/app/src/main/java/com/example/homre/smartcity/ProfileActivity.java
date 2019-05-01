@@ -125,11 +125,12 @@ public class ProfileActivity extends FragmentActivity {
             }
             //addresses.get(0).getLocality();
             Spinner spinner = findViewById(R.id.spinner);
-            SpinnerAdapter adapter = ArrayAdapter.createFromResource(this,towns, android.R.layout.simple_spinner_item);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, towns);
+            //SpinnerAdapter adapter = ArrayAdapter.createFromResource(this,towns, android.R.layout.simple_spinner_item);
             // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             // Apply the adapter to the spinner
-            spinner.setAdapter(adapter);
+            spinner.setAdapter(dataAdapter);
         }
         catch (IOException e) {
             e.printStackTrace();
