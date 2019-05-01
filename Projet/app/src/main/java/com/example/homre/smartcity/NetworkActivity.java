@@ -4,6 +4,7 @@ package com.example.homre.smartcity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -15,8 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.homre.smartcity.BDD.Actualite;
 import com.example.homre.smartcity.BDD.ActualiteSQL;
@@ -24,6 +27,7 @@ import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.ReseauSocial;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network;
+import com.example.homre.smartcity.RecyclerViewRessources.RecyclerViewClickListener;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -54,23 +58,29 @@ public class NetworkActivity extends FragmentActivity{
             Log.i("smart","DoInBackground");
             //TODO choix des reseaux de l utilisateur
             //TODO all
-            ArrayList<ReseauSocial> reseauSocials = ReseauSocialSQL.selectAll();
-            return reseauSocials;
+            ArrayList<ReseauSocial> reseauxSociaux = ReseauSocialSQL.selectAll();
+            return reseauxSociaux;
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
-        protected void onPostExecute(ArrayList<ReseauSocial> reseauSocials) {
+        protected void onPostExecute(ArrayList<ReseauSocial> reseauxSociaux) {
 
-            //TODO Faire l'affichage
-            Log.i("smart",""+reseauSocials.get(0).getIdOwner());
+            Log.i("smart",""+reseauxSociaux.get(0).getIdOwner());
             RecyclerView rv = findViewById(R.id.RVNetwork);
-            Adapter_Network adapter = new Adapter_Network(reseauSocials,getApplication());
+            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            rv.setLayoutManager(llm);
+            RecyclerViewClickListener listener = (v, position) -> {
+                //TODO Lancer l'activité avec param
+                Intent i = new Intent(getApplicationContext(),SelectedNetworkActivity.class);
+                i.putExtra("idNetwork",reseauxSociaux.get(position).getId());
+                i.putExtra("ownerNetwork",reseauxSociaux.get(position).getIdOwner());
+                i.putExtra("cityNetwork",reseauxSociaux.get(position).getPrivacy());
+                i.putExtra("nameNetwork",reseauxSociaux.get(position).getNom());
+                startActivity(i);
+            };
+            Adapter_Network adapter = new Adapter_Network(reseauxSociaux,getApplication(),listener);
             rv.setAdapter(adapter);
-            rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            //imageView.setImageBitmap(bitmaps.get(0));
-            //imageView.setVisibility(View.VISIBLE);
-
-            //tv.setText(actus.get(0).getTitre());
         }
     }
 }

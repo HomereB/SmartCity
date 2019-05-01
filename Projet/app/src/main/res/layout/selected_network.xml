@@ -16,38 +16,34 @@
             android:orientation="horizontal">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/textViewSNetworkName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/textViewSNetworkOwner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textViewSNetworkPrivacy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/ButtonSNetworkJoin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
@@ -56,19 +52,20 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVSNetwork"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             tools:listitem="@layout/post_item_list" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/textViewSNetworkMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Message :" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editTextSNetwork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

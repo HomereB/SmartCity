@@ -1,47 +1,49 @@
 package com.example.homre.smartcity.RecyclerViewRessources;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.homre.smartcity.BDD.ReseauSocial;
+import com.example.homre.smartcity.BDD.Commerces;
+import com.example.homre.smartcity.BDD.Post;
 import com.example.homre.smartcity.R;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Adapter_Network extends RecyclerView.Adapter<View_Holder_Network>{
+public class Adapter_SelectedNetwork extends RecyclerView.Adapter<View_Holder_SelectedNetwork>{
 
-    ArrayList<ReseauSocial> list ;
+    ArrayList<Post> list ;
     Context context;
-    RecyclerViewClickListener listener;
 
-    public Adapter_Network(ArrayList<ReseauSocial> list, Context context,RecyclerViewClickListener rvcl) {
+    public Adapter_SelectedNetwork(ArrayList<Post> list, Context context) {
         this.list = list;
         this.context = context;
-        listener = rvcl;
     }
 
     @Override
-    public View_Holder_Network onCreateViewHolder(ViewGroup parent, int viewType) {
+    public View_Holder_SelectedNetwork onCreateViewHolder(ViewGroup parent, int viewType) {
         //Inflate the layout, initialize the View Holder
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.network_item_list, parent, false);
-        View_Holder_Network holder = new View_Holder_Network(v,listener);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_list, parent, false);
+        View_Holder_SelectedNetwork holder = new View_Holder_SelectedNetwork(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(View_Holder_Network holder, int position) {
+    public void onBindViewHolder(View_Holder_SelectedNetwork holder, int position) {
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
-        String nom = list.get(position).getNom();
-        holder.nom.setText(nom.substring(0,1).toUpperCase()+nom.substring(1));
-        holder.proprio.setText(list.get(position).getIdOwner());
-        holder.confidentialite.setText(list.get(position).getPrivacy());
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy, hh");
+        holder.nom.setText(list.get(position).getIdAuteur());
+        holder.date.setText(df.format(list.get(position).getDate()).toString()+"h");
+        holder.message.setText(list.get(position).getText());
     }
 
     @Override
@@ -56,14 +58,14 @@ public class Adapter_Network extends RecyclerView.Adapter<View_Holder_Network>{
     }
 
     // Insert a new item to the RecyclerView on a predefined position
-    public void insert(int position, ReseauSocial reseauSocial) {
-        list.add(position, reseauSocial);
+    public void insert(int position, Post post){
+        list.add(position,post);
         notifyItemInserted(position);
     }
 
     // Remove a RecyclerView item containing a specified Data object
-    public void remove(ReseauSocial data) {
-        int position = list.indexOf(data);
+    public void remove(Post post) {
+        int position = list.indexOf(post);
         list.remove(position);
         notifyItemRemoved(position);
     }

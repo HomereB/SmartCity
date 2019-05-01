@@ -5,6 +5,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Lupusanghren on 26-Apr-19.
  */
@@ -13,7 +17,7 @@ public class Post {
 
     private int id;
     private String idAuteur;
-    private String titre;
+    private Date date;
     private String text;
     private int idReseau;
 
@@ -21,10 +25,12 @@ public class Post {
         try{
             id=data.getInt("id");
             idAuteur=data.getString("idAuteur");
-            titre=data.getString("titre");
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(data.getString("date"));
             text=data.getString("text");
             id=data.getInt("idReseauSocial");
         }catch (JSONException e){
+            Log.e("json","error parsing data : "+e.toString());
+        }catch (ParseException e){
             Log.e("json","error parsing data : "+e.toString());
         }
     }
@@ -37,8 +43,8 @@ public class Post {
         return idAuteur;
     }
 
-    public String getTitre(){
-        return titre;
+    public Date getDate(){
+        return date;
     }
 
     public String getText(){
