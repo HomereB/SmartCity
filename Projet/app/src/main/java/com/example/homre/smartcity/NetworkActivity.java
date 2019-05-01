@@ -62,7 +62,7 @@ public class NetworkActivity extends FragmentActivity{
                 ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
-                    new NetworkActivity.DownloadWebpageTask().execute("dsds");
+                    new NetworkActivity.DownloadWebpageTask().execute("all");
                 } else {
                     tv.setText("No network connection available.");
                 }
@@ -79,7 +79,7 @@ public class NetworkActivity extends FragmentActivity{
                     NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                     if (networkInfo != null && networkInfo.isConnected()) {
 
-                        new NetworkActivity.DownloadWebpageTask().execute("orderByLocation");
+                        new NetworkActivity.DownloadWebpageTask().execute("id");
                     } else {
                         tv.setText("No network connection available.");
                     }
@@ -95,9 +95,15 @@ public class NetworkActivity extends FragmentActivity{
         protected ArrayList<ReseauSocial> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            //TODO choix des reseaux de l utilisateur
-            //TODO all
-            ArrayList<ReseauSocial> reseauxSociaux = ReseauSocialSQL.selectAll();
+            ArrayList<ReseauSocial> reseauxSociaux;
+            if(urls[0].equals("all")){
+                Log.e("smart","all");
+                reseauxSociaux = ReseauSocialSQL.selectAll();
+            }else{
+                Log.e("smart","xoxo");
+                reseauxSociaux = ReseauSocialSQL.selectByUser("xoxo");
+            }
+
             return reseauxSociaux;
         }
         // onPostExecute displays the results of the AsyncTask.
