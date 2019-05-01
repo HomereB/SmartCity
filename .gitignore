@@ -63,3 +63,9 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+Projet/\.idea/
+
+Projet/build\.gradle
+
+Projet/gradle/wrapper/gradle-wrapper\.properties
