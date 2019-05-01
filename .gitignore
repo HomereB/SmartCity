@@ -69,3 +69,5 @@ Projet/\.idea/
 Projet/build\.gradle
 
 Projet/gradle/wrapper/gradle-wrapper\.properties
+
+Projet/app/build\.gradle
