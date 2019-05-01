@@ -41,17 +41,15 @@ public class SelectedNetworkActivity extends AppCompatActivity{
         tvName.setText(i.getStringExtra("nameNetwork"));
         tvOwner.setText(i.getStringExtra("ownerNetwork"));
         tvPrivacy.setText(i.getStringExtra("privacyNetwork"));
-        id = i.getIntExtra("idNetwork",-1);
-        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        id = i.getIntExtra("idNetwork", -1);
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            new SelectedNetworkActivity.DownloadWebpageTask().execute("dsds");
+            new DownloadWebpageTask().execute("dsds");
+        } else {
+            tvName.setText("No network connection available.");
         }
-        else {
-                tv.setText("No network connection available.");
-            }
-
-
+    }
 
     private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<Post>> {
         @Override
