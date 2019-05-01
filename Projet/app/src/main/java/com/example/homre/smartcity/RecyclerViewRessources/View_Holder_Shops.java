@@ -26,4 +26,6 @@ public class View_Holder_Shops extends RecyclerView.ViewHolder {
                 coordonnees = (TextView) itemView.findViewById(R.id.textViewShopCoordonees);
                 image = (ImageView) itemView.findViewById(R.id.imageViewShop);
         }
+
+
 }

@@ -41,7 +41,7 @@ public class Adapter_Shops extends RecyclerView.Adapter<View_Holder_Shops>{
             //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
             holder.nom.setText(list.get(position).getNom());
             holder.categorie.setText(list.get(position).getNomCategorie());
-            holder.adresse.setText(list.get(position).getImg());
+            holder.adresse.setText(list.get(position).getAdresse()+", "+list.get(position).getVille());
             holder.coordonnees.setText(list.get(position).getLatitude()+" , "+list.get(position).getLongitude());
             holder.image.setImageBitmap(imgList.get(position));
         }

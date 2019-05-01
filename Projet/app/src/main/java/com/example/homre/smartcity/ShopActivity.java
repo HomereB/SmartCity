@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
 public class ShopActivity extends FragmentActivity {
     TextView tv;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +90,6 @@ public class ShopActivity extends FragmentActivity {
             rv.setAdapter(adapter);
             rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             Log.i("smart",""+bitmaps.size());
-            //imageView.setImageBitmap(bitmaps.get(0));
-            //imageView.setVisibility(View.VISIBLE);
-
-            //tv.setText(actus.get(0).getTitre());
         }
     }
 }
