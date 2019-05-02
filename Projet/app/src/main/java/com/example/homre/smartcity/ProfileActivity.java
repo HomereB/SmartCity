@@ -189,7 +189,6 @@ public class ProfileActivity extends FragmentActivity {
             String sexe="Homme";//view get
             Date date = new Date();
             UserSQL.insertUser(id,date,sexe);
-            //TODO insert userCategories
             ArrayList<Categorie> categories = new ArrayList<>();
             //view get
             for (Categorie c :categories){
