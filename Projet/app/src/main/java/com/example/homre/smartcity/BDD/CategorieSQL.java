@@ -29,4 +29,21 @@ public class CategorieSQL {
         }
         return categories;
     }
+
+    public static ArrayList<Categorie> selectByUser(String idUser){
+        ArrayList<Categorie> categories = new ArrayList<>();
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("categorieUser.php?idUser="+idUser);
+        if (jsonArray!=null){
+            try{
+                for (int i=0;i<jsonArray.length();i++){
+                    categories.add(new Categorie(jsonArray.getJSONObject(i)));
+                }
+            }catch (JSONException e){
+                Log.e("json",e.toString());
+            }
+
+            return categories;
+        }
+        return categories;
+    }
 }
