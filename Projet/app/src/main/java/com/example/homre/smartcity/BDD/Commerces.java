@@ -75,4 +75,8 @@ public class Commerces {
 
     public String getVille(){return ville;}
 
+    public String toString(){
+        return ""+id;
+    }
+
 }

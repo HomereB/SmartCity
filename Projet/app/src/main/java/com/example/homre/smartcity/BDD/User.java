@@ -18,8 +18,11 @@ public class User {
     public static final String Femme="Femme";
     private ArrayList<Categorie> categories;
 
-    //TODO user
-    public User(){
+    public User(String identifiant, Date d, String s){
+        id=identifiant;
+        date=d;
+        sexe=s;
+        categories=new ArrayList<>();
     }
 
     public String getId(){

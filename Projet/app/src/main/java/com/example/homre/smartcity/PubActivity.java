@@ -90,12 +90,8 @@ public class PubActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<Publicite> pubs) {
-            //TODO Faire l'affichage
-
             Adapter_ViewPager_Adds mCustomPagerAdapter = new Adapter_ViewPager_Adds(getApplicationContext(), bitmaps);
             vp.setAdapter(mCustomPagerAdapter);
-
-
 
             //tv.setText(pubs.get(0).getNomCommerce());
         }

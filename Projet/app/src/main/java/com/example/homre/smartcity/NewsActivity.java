@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -66,8 +67,9 @@ public class NewsActivity extends FragmentActivity {
         protected ArrayList<Actualite> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            //TODO choix de la ville via donne de l utilisateur
-            ArrayList<Actualite> p = ActualiteSQL.selectByVille("Montpellier");
+            SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
+            String ville = user.getString("ville","Montpellier");
+            ArrayList<Actualite> p = ActualiteSQL.selectByVille(ville);
             bitmaps = new ArrayList<>();
             try{
                 for(int j=0;j<p.size();j++){
@@ -87,7 +89,6 @@ public class NewsActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(ArrayList<Actualite> actus) {
 
-            //TODO Faire l'affichage
             Log.i("smart",""+bitmaps.size());
             RecyclerView rv = findViewById(R.id.RVNews);
             Adapter_News adapter = new Adapter_News(actus,bitmaps,getApplication());

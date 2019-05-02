@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,7 @@ import com.example.homre.smartcity.BDD.Actualite;
 import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Categorie;
+import com.example.homre.smartcity.BDD.CategorieSQL;
 import com.example.homre.smartcity.BDD.Commerces;
 import com.example.homre.smartcity.BDD.CommercesSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Shops;
@@ -144,12 +146,11 @@ public class ShopActivity extends FragmentActivity {
         protected ArrayList<Commerces> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            //TODO choix de la ville via donne de l utilisateur
-            String ville = "Montpellier";
-            ArrayList<Categorie> cats = new ArrayList<>();
-            //cats.add(new Categorie(1,"Salle De Sport"));//TODO select avec filtre de categorie
-            ArrayList<Commerces> p = CommercesSQL.selectByVilleAndCat(ville,cats);
-            //ArrayList<Commerces> commerces = CommercesSQL.selectByVilleAndCat("Montpellier",1);
+            SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
+            String ville = user.getString("ville","Montpellier");
+            String idUser = user.getString("username","Lupusanghren");
+            ArrayList<Categorie> categories = CategorieSQL.selectByUser(idUser);
+            ArrayList<Commerces> p = CommercesSQL.selectByVilleAndCat(ville,categories);
             bitmaps = new ArrayList<>();
             try{
                 for(int j=0;j<p.size();j++){

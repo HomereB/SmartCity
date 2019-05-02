@@ -34,9 +34,20 @@ public class CommercesSQL {
         if (Cats.size()==0){
             return selectByVille(ville);
         }
-        int idCat = Cats.get(0).getId();
+
+        String cats = "";
+        if (Cats.size()==1){
+            cats="["+Cats.get(0).getId()+"]";
+        }else {
+            cats="[";
+            for(Categorie c : Cats){
+                cats+=c.getId()+",";
+            }
+            cats=cats.substring(0,cats.length()-1);
+            cats+="]";
+        }
         ArrayList<Commerces> commerces = new ArrayList<>();
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("commerces.php?ville="+ville+"&idCategorie="+idCat);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("commerces.php?ville="+ville+"&idCategorie="+cats);
         if (jsonArray!=null){
             try{
                 for (int i=0;i<jsonArray.length();i++){

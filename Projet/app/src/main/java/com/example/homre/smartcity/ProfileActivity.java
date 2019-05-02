@@ -46,7 +46,7 @@ import java.util.Locale;
 
 public class ProfileActivity extends FragmentActivity {
     final int MY_PERMISSIONS_REQUEST_LOCATION=0;
-    final String PREFS_NAME = "User";
+    public static final String PREFS_NAME = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
