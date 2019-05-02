@@ -41,10 +41,13 @@
     <!-- Profil -->
 
     <string name="txtProfilePseudo">Pseudo :</string>
-    <string name="txtProfileEmail">Adresse mail :</string>
+    <string name="txtProfileDate">Date de naissance :</string>
     <string name="txtProfileCity">Ville :</string>
-    <string name="txtProfileDescription">Description :</string>
+    <string name="txtProfileSexe">Sexe :</string>
     <string name="txtProfileInterest">Centre d\'interets :</string>
+    <string name="radioProfileSexeM">Homme</string>
+    <string name="radioProfileSexeF">Femme</string>
+    <string name="txtProfileDateModel">aaaa-mm-dd</string>
 
     <!-- Reso -->
 

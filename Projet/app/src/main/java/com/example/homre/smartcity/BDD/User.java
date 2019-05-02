@@ -14,6 +14,7 @@ public class User {
     private String id;
     private Date date;
     private String sexe;
+    private String ville;
     public static final String HOMME="Homme";
     public static final String Femme="Femme";
     private ArrayList<Categorie> categories;
@@ -21,6 +22,8 @@ public class User {
     //TODO user
     public User(){
     }
+
+    public String getVille(){return ville;}
 
     public String getId(){
         return id;
@@ -33,4 +36,6 @@ public class User {
     public  String getSexe(){
         return sexe;
     }
+
+    public ArrayList<Categorie> getCategories(){return categories;}
 }
