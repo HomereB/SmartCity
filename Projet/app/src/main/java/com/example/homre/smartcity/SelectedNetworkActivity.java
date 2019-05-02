@@ -56,8 +56,6 @@ public class SelectedNetworkActivity extends AppCompatActivity{
         protected ArrayList<Post> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            //TODO choix des reseaux de l utilisateur
-            //TODO all
             ArrayList<Post> posts = PostSQL.selectByIdReseau(id);
             return posts;
         }

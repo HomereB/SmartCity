@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,7 +46,6 @@ public class NetworkActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_networks);
-        //TODO
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -101,7 +101,9 @@ public class NetworkActivity extends FragmentActivity{
                 reseauxSociaux = ReseauSocialSQL.selectAll();
             }else{
                 Log.e("smart","xoxo");
-                reseauxSociaux = ReseauSocialSQL.selectByUser("xoxo");
+                SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
+                String id = user.getString("username","xoxo");
+                reseauxSociaux = ReseauSocialSQL.selectByUser(id);
             }
 
             return reseauxSociaux;
@@ -116,7 +118,6 @@ public class NetworkActivity extends FragmentActivity{
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(llm);
             RecyclerViewClickListener listener = (v, position) -> {
-                //TODO Lancer l'activité avec param
                 Intent i = new Intent(getApplicationContext(),SelectedNetworkActivity.class);
                 i.putExtra("idNetwork",reseauxSociaux.get(position).getId());
                 i.putExtra("ownerNetwork",reseauxSociaux.get(position).getIdOwner());

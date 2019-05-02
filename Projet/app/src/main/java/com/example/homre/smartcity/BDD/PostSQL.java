@@ -15,7 +15,6 @@ public class PostSQL {
 
     public static ArrayList<Post> selectByIdReseau(int idReseau){
         ArrayList<Post> posts = new ArrayList<>();
-        //TODO php
         JSONArray jsonArray = BaseDeDonne.SQLQuery("post.php?idReseau="+idReseau);
         if (jsonArray!=null){
             try{
@@ -33,7 +32,6 @@ public class PostSQL {
 
     public static Post selectById(int id){
         ArrayList<Post> posts = new ArrayList<>();
-        //TODO php
         JSONArray jsonArray = BaseDeDonne.SQLQuery("post.php?id="+id);
         if (jsonArray!=null){
             try{
