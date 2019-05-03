@@ -17,13 +17,11 @@
             android:layout_height="wrap_content"
             android:text="@string/txtProfilePseudo" />
 
-        <EditText
-            android:id="@+id/editTextProfileName"
+        <TextView
+            android:id="@+id/textViewProfileDisplayName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textViewProfileDate"
@@ -31,13 +29,11 @@
             android:layout_height="wrap_content"
             android:text="@string/txtProfileDate" />
 
-        <EditText
-            android:id="@+id/editTextProfileDate"
+        <TextView
+            android:id="@+id/textViewProfileDisplayDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/txtProfileDateModel"
-            android:inputType="date" />
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textViewProfileCity"
@@ -56,26 +52,11 @@
             android:layout_height="wrap_content"
             android:text="@string/txtProfileSexe" />
 
-        <RadioGroup
-            android:id="@+id/radioGroupProfileSex"
+        <TextView
+            android:id="@+id/textViewProfileDisplaySex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButtonProfileM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/radioProfileSexeM" />
-
-            <RadioButton
-                android:id="@+id/radioButtonProfileF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/radioProfileSexeF" />
-        </RadioGroup>
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textViewProfileCategories"
@@ -92,8 +73,6 @@
                 android:id="@+id/listProfileCategories"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-
             </LinearLayout>
         </ScrollView>
 

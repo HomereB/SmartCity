@@ -1,66 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <HorizontalScrollView
+        <TextView
+            android:id="@+id/textViewMainName"
             android:layout_width="match_parent"
-            android:layout_height="245dp">
+            android:layout_height="wrap_content"
+            android:text="@string/txtProfilePseudo" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/screen_background_dark" />
-        </HorizontalScrollView>
-
-        <VideoView
-            android:id="@+id/videoView"
+        <EditText
+            android:id="@+id/editTextMainName"
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textViewMainDate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtProfileDate" />
+
+        <EditText
+            android:id="@+id/editTextMainDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/txtProfileDateModel"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textViewMainCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtProfileCity" />
+
+        <Spinner
+            android:id="@+id/spinnerMainCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textViewMainSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtProfileSexe" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupMainSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button"
+            <RadioButton
+                android:id="@+id/radioButtonMainM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/radioProfileSexeM" />
 
-            <Button
-                android:id="@+id/button2"
+            <RadioButton
+                android:id="@+id/radioButtonMainF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/radioProfileSexeF" />
+        </RadioGroup>
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
+        <TextView
+            android:id="@+id/textViewMainCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtProfileInterest" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="167dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/listMainCategories"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/buttonMainApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonProfilValider" />
+
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

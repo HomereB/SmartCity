@@ -26,24 +26,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.homre.smartcity.BDD.Categorie;
 import com.example.homre.smartcity.BDD.CategorieSQL;
-import com.example.homre.smartcity.BDD.Post;
-import com.example.homre.smartcity.BDD.PostSQL;
+
 import com.example.homre.smartcity.BDD.UserSQL;
-import com.example.homre.smartcity.RecyclerViewRessources.Adapter_SelectedNetwork;
 
 import java.io.IOException;
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,8 +61,17 @@ public class ProfileActivity extends FragmentActivity {
         //TODO autowrite data
         SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
         String username = user.getString("username","Name");
-        EditText editText = findViewById(R.id.editTextProfileName);
-        editText.setText(username);
+        TextView displayName = findViewById(R.id.textViewProfileDisplayName);
+        displayName.setText(username);
+
+        String date = user.getString("date","Name");
+        TextView displayDate = findViewById(R.id.textViewProfileDisplayDate);
+        displayDate.setText(date);
+
+        String sexe = user.getString("sexe","Name");
+        TextView displaySexe = findViewById(R.id.textViewProfileDisplaySex);
+        displaySexe.setText(sexe);
+
 
         //centre d interet
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -96,23 +101,11 @@ public class ProfileActivity extends FragmentActivity {
                 ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
-                    TextView nom = findViewById(R.id.editTextProfileName);
 
                     Spinner ville = findViewById(R.id.spinnerProfileCity);
-
-                    RadioGroup rg = findViewById(R.id.radioGroupProfileSex);
-                    int selectedId = rg.getCheckedRadioButtonId();
-                    RadioButton rb = findViewById(selectedId);
-
-                    TextView date = findViewById(R.id.editTextProfileDate);
-
                     LinearLayout ll = findViewById(R.id.listProfileCategories);
                     ArrayList<String> data = new ArrayList<>();
-                    data.add(nom.getText().toString());
                     data.add(ville.getSelectedItem().toString());
-                    data.add(rb.getText().toString());
-                    data.add(date.getText().toString());
-                    int firstCB = ll.getChildAt(0).getId();
                     for(int i =0;i<ll.getChildCount();i++)
                     {
                         CheckBox cb = (CheckBox)ll.getChildAt(i);
@@ -125,7 +118,7 @@ public class ProfileActivity extends FragmentActivity {
                     String[] tab = Arrays.copyOf(azy,
                             azy.length,
                             String[].class);
-                    new InsertUser().execute(tab);
+                    new UpdateUser().execute(tab);
                 } else {
                     //tv.setText("No network connection available.");
                 }
@@ -191,10 +184,7 @@ public class ProfileActivity extends FragmentActivity {
             //addresses.get(0).getLocality();
             Spinner spinner = findViewById(R.id.spinnerProfileCity);
             ArrayAdapter<String> dataAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, towns);
-            //SpinnerAdapter adapter = ArrayAdapter.createFromResource(this,towns, android.R.layout.simple_spinner_item);
-            // Specify the layout to use when the list of choices appears
-            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
+
             spinner.setAdapter(dataAdapter);
         }
         catch (IOException e) {
@@ -223,49 +213,24 @@ public class ProfileActivity extends FragmentActivity {
         }
     }
 
-    private class InsertUser extends AsyncTask<String, Void, Boolean> {
+    private class UpdateUser extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
 
             SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
-            String username = user.getString("username","");
-            String id = urls[0];//view get
-            String ville = urls[1];
-            String sexe=urls[2];//view get
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = null;
-            try {
-                date = sdf.parse(urls[3]);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            String id = user.getString("username","");//view get
+            String ville = urls[0];
+
+            //update
+            ArrayList<Integer> categories = new ArrayList<>();
+            for (int i = 1; i < urls.length ; i++){
+                categories.add(Integer.parseInt(urls[i]));
             }
-            if (username.equals("")){
-                //insert
-                UserSQL.insertUser(id,ville,date,sexe);
-                for (int i = 4; i < urls.length ; i++){
-                    UserSQL.insertCategoriesUser(id,Integer.parseInt(urls[i]));
-                }
-                SharedPreferences.Editor editor = user.edit();
-                editor.putString("username",id);
-                editor.putString("ville", ville);
-                editor.putString("date",urls[3]);
-                editor.commit();
-            }else{
-                //update
-                ArrayList<Integer> categories = new ArrayList<>();
-                for (int i = 4; i < urls.length ; i++){
-                    //UserSQL.insertCategoriesUser(id,Integer.parseInt(urls[i]));
-                    categories.add(Integer.parseInt(urls[i]));
-                }
-                UserSQL.updateCategoriesUser(id,categories);//TODO delete user categorie
-                SharedPreferences.Editor editor = user.edit();
-                editor.putString("username",id);
-                editor.putString("ville", ville);
-                editor.putString("date",urls[3]);
-                editor.commit();
-            }
+            UserSQL.updateCategoriesUser(id,categories);
+            SharedPreferences.Editor editor = user.edit();
+            editor.putString("ville", ville);
 
             return true;
         }

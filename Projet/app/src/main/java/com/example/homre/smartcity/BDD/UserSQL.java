@@ -27,14 +27,14 @@ public class UserSQL {
         //Log.i("smart",jsonArray.length()+"");
         return true;
     }
-
+/*
     public static boolean updateUser(String id, Date d, String sexe){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date=format.format(d);
         JSONArray jsonArray = BaseDeDonne.SQLQuery("updateUser.php?pseudo="+id+"&sexe="+sexe+"&date="+date);
         Log.i("smart",jsonArray.length()+"");
         return true;
-    }
+    }*/
 
     public static boolean updateCategoriesUser(String id, ArrayList<Integer> Cats){
         String cats = "";
