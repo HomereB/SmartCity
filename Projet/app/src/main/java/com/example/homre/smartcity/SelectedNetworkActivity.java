@@ -53,6 +53,15 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         tvOwner = findViewById(R.id.textViewSNetworkOwner);
         tvPrivacy = findViewById(R.id.textViewSNetworkPrivacy);
         Intent i = getIntent();
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            new DownloadWebpageTask().execute("dsds");
+        } else {
+            tvName.setText("No network connection available.");
+        }
+
         tvName.setText(i.getStringExtra("nameNetwork"));
         tvOwner.setText(i.getStringExtra("ownerNetwork"));
         tvPrivacy.setText(i.getStringExtra("privacyNetwork"));
@@ -72,10 +81,30 @@ public class SelectedNetworkActivity extends AppCompatActivity {
 
     }
 
+    private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<Post>> {
+        @Override
+        protected ArrayList<Post> doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+            Log.i("smart", "DoInBackground");
+            ArrayList<Post> posts = PostSQL.selectByIdReseau(id);
+            return posts;
+        }
+
+        protected void onPostExecute(ArrayList<Post> posts) {
+
+            RecyclerView rv = findViewById(R.id.RVSNetwork);
+            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            rv.setLayoutManager(llm);
+            Adapter_SelectedNetwork adapter = new Adapter_SelectedNetwork(posts, getApplication());
+            rv.setAdapter(adapter);
+        }
+    };
+
     private class InsertPost extends AsyncTask<String, Void, Boolean> {
         @Override
-        protected Boolean doInBackground(String... urls) {
-            Log.i("smart", "DoInBackground");
+            protected Boolean doInBackground(String... urls){
+                Log.i("smart", "DoInBackground");
 
             SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
             String idUser = user.getString("username","");
