@@ -56,6 +56,12 @@
     <string name="txtNetworkCity">Ville :</string>
 
 
+    <!--AlertDialog MainAcitvity-->
+    <string name="dialog_message">Cette action est irreversible</string>
+    <string name="dialog_title">Etes vous sur ?</string>
+    <string name="ok">Valider</string>
+    <string name="no">Annuler</string>
+
 
 
 

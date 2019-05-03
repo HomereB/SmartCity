@@ -38,4 +38,13 @@ public class Categorie {
     public String getNom(){
         return nom;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Categorie){
+            return ((Categorie) o).getId()==id;
+        }else{
+            return false;
+        }
+    }
 }
