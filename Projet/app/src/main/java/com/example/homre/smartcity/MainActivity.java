@@ -2,6 +2,7 @@ package com.example.homre.smartcity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,40 +83,62 @@ public class MainActivity extends AppCompatActivity {
             valider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                    if (networkInfo != null && networkInfo.isConnected()) {
-                        TextView nom = findViewById(R.id.editTextMainName);
+                    Log.e("smart","builder");
+                    // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 
-                        Spinner ville = findViewById(R.id.spinnerMainCity);
+                    // 2. Chain together various setter methods to set the dialog characteristics
+                    builder.setMessage(R.string.dialog_message)
+                            .setTitle(R.string.dialog_title)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                                    if (networkInfo != null && networkInfo.isConnected()) {
+                                        TextView nom = findViewById(R.id.editTextMainName);
 
-                        RadioGroup rg = findViewById(R.id.radioGroupMainSex);
-                        int selectedId = rg.getCheckedRadioButtonId();
-                        RadioButton rb = findViewById(selectedId);
+                                        Spinner ville = findViewById(R.id.spinnerMainCity);
 
-                        TextView date = findViewById(R.id.editTextMainDate);
+                                        RadioGroup rg = findViewById(R.id.radioGroupMainSex);
+                                        int selectedId = rg.getCheckedRadioButtonId();
+                                        RadioButton rb = findViewById(selectedId);
 
-                        LinearLayout ll = findViewById(R.id.listMainCategories);
-                        ArrayList<String> data = new ArrayList<>();
-                        data.add(nom.getText().toString());
-                        data.add(ville.getSelectedItem().toString());
-                        data.add(rb.getText().toString());
-                        data.add(date.getText().toString());
-                        int firstCB = ll.getChildAt(0).getId();
-                        for (int i = 0; i < ll.getChildCount(); i++) {
-                            CheckBox cb = (CheckBox) ll.getChildAt(i);
-                            if (cb.isChecked()) {
-                                data.add(Integer.toString(Integer.parseInt(cb.getText().toString().substring(0, 1))));
-                            }
-                        }
-                        Object[] azy = data.toArray();
-                        String[] tab = Arrays.copyOf(azy,
-                                azy.length,
-                                String[].class);
-                        new InsertUser().execute(tab);
-                    } else {
-                        //tv.setText("No network connection available.");
-                    }
+                                        TextView date = findViewById(R.id.editTextMainDate);
+
+                                        LinearLayout ll = findViewById(R.id.listMainCategories);
+                                        ArrayList<String> data = new ArrayList<>();
+                                        data.add(nom.getText().toString());
+                                        data.add(ville.getSelectedItem().toString());
+                                        data.add(rb.getText().toString());
+                                        data.add(date.getText().toString());
+                                        int firstCB = ll.getChildAt(0).getId();
+                                        for (int i = 0; i < ll.getChildCount(); i++) {
+                                            CheckBox cb = (CheckBox) ll.getChildAt(i);
+                                            if (cb.isChecked()) {
+                                                data.add(Integer.toString(Integer.parseInt(cb.getText().toString().substring(0, 1))));
+                                            }
+                                        }
+                                        Object[] azy = data.toArray();
+                                        String[] tab = Arrays.copyOf(azy,
+                                                azy.length,
+                                                String[].class);
+                                        new InsertUser().execute(tab);
+                                    } else {
+                                        //tv.setText("No network connection available.");
+                                    }
+                                }
+                            })
+                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                    // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             });
 
@@ -247,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute (Boolean success){
                 if (success) {
 
-                    Toast.makeText(getApplicationContext(), "ggwp!", (Toast.LENGTH_SHORT));
+                    Toast.makeText(getApplicationContext(), "ggwp!", (Toast.LENGTH_SHORT)).show();
                     Intent i = new Intent(getApplicationContext(), NewsActivity.class);
                     startActivity(i);
                 }

@@ -198,6 +198,17 @@ public class ProfileActivity extends FragmentActivity {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
             ArrayList<Categorie> categories = CategorieSQL.selectAll();
+            SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
+            String idUser = user.getString("username","");
+            SharedPreferences.Editor editor = user.edit();
+            editor.putInt("nbCat",categories.size());
+            editor.commit();
+            if (!idUser.equals("")){
+                ArrayList<Categorie> catUser = CategorieSQL.selectByUser(idUser);
+                categories.addAll(catUser);
+            }
+            Log.i("smart",categories.toString());
+
             return categories;
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -205,9 +216,18 @@ public class ProfileActivity extends FragmentActivity {
         protected void onPostExecute(ArrayList<Categorie> categories) {
             //todo Autowrite data
             LinearLayout ln = findViewById(R.id.listProfileCategories);
+            SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
+            int nbCat = user.getInt("nbCat",0);
+            ArrayList<Categorie> catUser = new ArrayList<>();
+            while (categories.size()>nbCat){
+                catUser.add(categories.remove(nbCat));
+            }
             for (Categorie c : categories){
                 CheckBox checkBox = new CheckBox(ln.getContext());
                 checkBox.setText(c.getId()+". "+c.getNom());
+                if(catUser.contains(c)){
+                    checkBox.setChecked(true);
+                }
                 ln.addView(checkBox);
             }
         }

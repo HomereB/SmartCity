@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import java.sql.Date;
+
 public class Adapter_SelectedNetwork extends RecyclerView.Adapter<View_Holder_SelectedNetwork>{
 
     ArrayList<Post> list ;
@@ -40,9 +42,10 @@ public class Adapter_SelectedNetwork extends RecyclerView.Adapter<View_Holder_Se
     public void onBindViewHolder(View_Holder_SelectedNetwork holder, int position) {
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
-        DateFormat df = new SimpleDateFormat("dd-mm-yyyy, hh");
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh");
+        DateFormat dfmin = new SimpleDateFormat("mm");
         holder.nom.setText(list.get(position).getIdAuteur());
-        holder.date.setText(df.format(list.get(position).getDate()).toString()+"h");
+        holder.date.setText(df.format(list.get(position).getDate())+"h"+dfmin.format(list.get(position).getDate())+"min");
         holder.message.setText(list.get(position).getText());
     }
 
