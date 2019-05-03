@@ -36,9 +36,20 @@ public class UserSQL {
         return true;
     }
 
-    public static boolean updateCategoriesUser(String id, int idCat){
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("updateUserCategorie.php?idUser="+id+"&idCategorie"+idCat);
-        Log.i("smart",jsonArray.length()+"");
+    public static boolean updateCategoriesUser(String id, ArrayList<Integer> Cats){
+        String cats = "";
+        if (Cats.size()==1){
+            cats="["+Cats.get(0)+"]";
+        }else {
+            cats="[";
+            for(Integer c : Cats){
+                cats+=c+",";
+            }
+            cats=cats.substring(0,cats.length()-1);
+            cats+="]";
+        }
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("updateUserCategorie.php?idUser="+id+"&idCategorie="+cats);
+        //Log.i("smart",jsonArray.length()+"");
         return true;
     }
 }

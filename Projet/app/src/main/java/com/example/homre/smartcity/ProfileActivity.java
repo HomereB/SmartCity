@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -53,12 +54,19 @@ import java.util.Locale;
 
 public class ProfileActivity extends FragmentActivity {
     final int MY_PERMISSIONS_REQUEST_LOCATION=0;
-    final String PREFS_NAME = "User";
+    static final String PREFS_NAME = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        //pseudo
+        //TODO autowrite data
+        SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
+        String username = user.getString("username","Name");
+        EditText editText = findViewById(R.id.editTextProfileName);
+        editText.setText(username);
 
         //centre d interet
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -205,6 +213,7 @@ public class ProfileActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<Categorie> categories) {
+            //todo Autowrite data
             LinearLayout ln = findViewById(R.id.listProfileCategories);
             for (Categorie c : categories){
                 CheckBox checkBox = new CheckBox(ln.getContext());
@@ -219,8 +228,9 @@ public class ProfileActivity extends FragmentActivity {
         protected Boolean doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            //TODO insert user
 
+            SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
+            String username = user.getString("username","");
             String id = urls[0];//view get
             String ville = urls[1];
             String sexe=urls[2];//view get
@@ -231,24 +241,39 @@ public class ProfileActivity extends FragmentActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            UserSQL.insertUser(id,ville,date,sexe);
-            //TODO insert userCategories
-            for (int i = 4; i < urls.length ; i++){
-                UserSQL.insertCategoriesUser(id,Integer.parseInt(urls[i]));
+            if (username.equals("")){
+                //insert
+                UserSQL.insertUser(id,ville,date,sexe);
+                for (int i = 4; i < urls.length ; i++){
+                    UserSQL.insertCategoriesUser(id,Integer.parseInt(urls[i]));
+                }
+                SharedPreferences.Editor editor = user.edit();
+                editor.putString("username",id);
+                editor.putString("ville", ville);
+                editor.putString("date",urls[3]);
+                editor.commit();
+            }else{
+                //update
+                ArrayList<Integer> categories = new ArrayList<>();
+                for (int i = 4; i < urls.length ; i++){
+                    //UserSQL.insertCategoriesUser(id,Integer.parseInt(urls[i]));
+                    categories.add(Integer.parseInt(urls[i]));
+                }
+                UserSQL.updateCategoriesUser(id,categories);//TODO delete user categorie
+                SharedPreferences.Editor editor = user.edit();
+                editor.putString("username",id);
+                editor.putString("ville", ville);
+                editor.putString("date",urls[3]);
+                editor.commit();
             }
-            //TODO stcoker var user
-            SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
-            SharedPreferences.Editor editor = user.edit();
-            editor.putString("username",id);
-            editor.putString("ville", ville);
-            //ArrayList<Categorie> categories = CategorieSQL.selectAll();
+
             return true;
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(Boolean success) {
             if (success){
-                //Toast.makeText(getApplicationContext(),"ggwp!",(Toast.LENGTH_SHORT));
+                Toast.makeText(getApplicationContext(),"ggwp!",(Toast.LENGTH_SHORT));
             }
         }
     }
