@@ -46,7 +46,7 @@ public class Adapter_News extends RecyclerView.Adapter<View_Holder_News>{
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
         holder.titre.setText(list.get(position).getTitre());
-        DateFormat df = new SimpleDateFormat("dd-mm-yyyy, hh");
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy, hh");
 
         holder.date.setText(df.format(list.get(position).getDate()).toString()+"h");
         holder.ville.setText(list.get(position).getVille()+", ");

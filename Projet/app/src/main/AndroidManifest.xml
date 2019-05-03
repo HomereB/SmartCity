@@ -23,6 +23,7 @@
         <activity android:name=".NetworkActivity"></activity>
         <activity android:name=".PubActivity"></activity>
         <activity android:name=".SelectedNetworkActivity"></activity>
+        <activity android:name=".CreateNetworkActivity"></activity>
 
 
     </application>

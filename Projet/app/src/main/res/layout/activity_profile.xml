@@ -85,14 +85,15 @@
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom">
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:foregroundGravity="bottom">
 
             <fragment
                 android:id="@+id/list"
                 class="com.example.homre.smartcity.NavigationFragment"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"></fragment>
         </FrameLayout>
     </LinearLayout>

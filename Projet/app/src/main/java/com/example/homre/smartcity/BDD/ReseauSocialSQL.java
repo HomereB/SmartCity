@@ -50,7 +50,7 @@ public class ReseauSocialSQL {
 
     public static ReseauSocial selectById(int id){
         ArrayList<ReseauSocial> reseauSocials = new ArrayList<>();
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("reseaux_selectione?idReseau="+id);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("reseaux_selectione.php?idReseau="+id);
         if (jsonArray!=null){
             try{
                 for (int i=0;i<jsonArray.length();i++){
@@ -68,12 +68,12 @@ public class ReseauSocialSQL {
     public static boolean insertReseau(String username,String ville,boolean isPublic,String nom){
         String bool = "0";
         if (isPublic){bool="1";}
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocial?pseudo="+username+"&ville="+ville+"&nom="+nom+"&isPublic="+bool);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocial.php?pseudo="+username+"&ville="+ville+"&nom="+nom+"&isPublic="+bool);
         return true;
     }
 
     public static boolean insertReseauUser(String username, int idReseau){
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialUser?pseudo="+username+"&idReseau="+idReseau);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialUser.php?pseudo="+username+"&idReseau="+idReseau);
         return true;
     }
 

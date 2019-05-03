@@ -20,6 +20,8 @@
 
     <string name="buttonNetworkList">Tous</string>
     <string name="buttonNetworkJoined">Rejoints</string>
+    <string name="buttonNetworkConfirm">Valider</string>
+    <string name="buttonNetworkSend">Envoyer</string>
 
     <!-- boutons réso select-->
 
@@ -54,6 +56,10 @@
     <string name="txtNetworkName">Pseudo :</string>
     <string name="txtNetworkOwner">Appartient à :</string>
     <string name="txtNetworkCity">Ville :</string>
+    <string name="txtNetworkChooseName">Nom du réseau : </string>
+    <string name="txtNetworkPrivacy">Confidentialité du réseau : </string>
+    <string name="txtNetworkPrivate">Privé</string>
+    <string name="txtNetworkPublic">Public</string>
 
 
 

@@ -1,42 +1,26 @@
 package com.example.homre.smartcity;
 
 
-import android.Manifest;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.homre.smartcity.BDD.Actualite;
-import com.example.homre.smartcity.BDD.ActualiteSQL;
-import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.ReseauSocial;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network;
 import com.example.homre.smartcity.RecyclerViewRessources.RecyclerViewClickListener;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class NetworkActivity extends FragmentActivity{
@@ -87,7 +71,17 @@ public class NetworkActivity extends FragmentActivity{
             });
 
 
+        //event listener creation
+        Button creer = findViewById(R.id.buttonNetworkCreate);
 
+        creer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), CreateNetworkActivity.class);
+                Log.i("smart", "la c ok");
+                startActivity(i);
+            }
+        });
     }
 
     private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<ReseauSocial>> {

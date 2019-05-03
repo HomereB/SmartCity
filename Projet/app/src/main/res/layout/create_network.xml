@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewCNetworkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtNetworkChooseName" />
+
+        <EditText
+            android:id="@+id/editTextCNetworkInputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:layout_marginVertical="30dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewCNetworkPrivacy"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="@string/txtNetworkPrivacy" />
+
+        <RadioGroup
+            android:id = "@+id/radioGroupCNetworkPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonCNetworkPublic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtNetworkPrivate" />
+
+            <RadioButton
+                android:id="@+id/radioButtonCNetworkPrivate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtNetworkPublic" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonCNetworkConfirm"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="120dp"
+            android:text="@string/buttonNetworkConfirm" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

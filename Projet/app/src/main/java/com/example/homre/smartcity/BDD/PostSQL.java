@@ -48,9 +48,9 @@ public class PostSQL {
         return posts.get(0);
     }
 
-    public static boolean insertPost(String idUser, Date date,String texte, int idReseau){
+    public static boolean insertPost(String idUser, String date,String texte, int idReseau){
         Log.i("smart",date.toString());
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertPost.php?pseudo="+idUser+"&date="+date.toString()+"&text="+texte+"&idReseau="+idReseau);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertPost.php?pseudo="+idUser+"&date="+date+"&text="+texte+"&idReseau="+idReseau);
         return true;
     }
 }
