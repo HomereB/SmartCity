@@ -28,7 +28,7 @@ public class Actualite {
             id=data.getInt("id");
             ville=data.getString("ville");
             img=data.getString("img");
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(data.getString("date"));
+            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(data.getString("date"));
             titre=data.getString("titre");
             texte=data.getString("description");
             categorie = data.getString("nomCategorie");

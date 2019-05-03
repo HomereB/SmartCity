@@ -25,7 +25,8 @@ public class Post {
         try{
             id=data.getInt("id");
             idAuteur=data.getString("idAuteur");
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(data.getString("date"));
+            Log.e("smart",data.getString("date"));
+            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(data.getString("date"));
             text=data.getString("text");
             id=data.getInt("idReseauSocial");
         }catch (JSONException e){
