@@ -238,7 +238,7 @@ public class ProfileActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(Boolean success) {
             if (success){
-                Toast.makeText(getApplicationContext(),"ggwp!",(Toast.LENGTH_SHORT));
+                Toast.makeText(getApplicationContext(),"ggwp!",(Toast.LENGTH_SHORT)).show();
             }
         }
     }

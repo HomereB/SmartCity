@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 /**
  * Created by Lupusanghren on 26-Apr-19.
@@ -45,5 +46,11 @@ public class PostSQL {
             return posts.get(0);
         }
         return posts.get(0);
+    }
+
+    public static boolean insertPost(String idUser, Date date,String texte, int idReseau){
+        Log.i("smart",date.toString());
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertPost.php?pseudo="+idUser+"&date="+date.toString()+"&text="+texte+"&idReseau="+idReseau);
+        return true;
     }
 }

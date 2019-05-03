@@ -65,4 +65,16 @@ public class ReseauSocialSQL {
         return reseauSocials.get(0);
     }
 
+    public static boolean insertReseau(String username,String ville,boolean isPublic,String nom){
+        String bool = "0";
+        if (isPublic){bool="1";}
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocial?pseudo="+username+"&ville="+ville+"&nom="+nom+"&isPublic="+bool);
+        return true;
+    }
+
+    public static boolean insertReseauUser(String username, int idReseau){
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialUser?pseudo="+username+"&idReseau="+idReseau);
+        return true;
+    }
+
 }

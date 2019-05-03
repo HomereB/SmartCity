@@ -112,7 +112,7 @@ public class NetworkActivity extends FragmentActivity{
         @Override
         protected void onPostExecute(ArrayList<ReseauSocial> reseauxSociaux) {
 
-            Log.i("smart",""+reseauxSociaux.get(0).getIdOwner());
+            Log.i("smart",""+reseauxSociaux.size());
             RecyclerView rv = findViewById(R.id.RVNetwork);
             LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
             llm.setOrientation(LinearLayoutManager.VERTICAL);
