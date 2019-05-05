@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-class SelectedShopActivity extends AppCompatActivity {
+public class SelectedShopActivity extends AppCompatActivity {
 
     int id;
     TextView nom;

@@ -24,7 +24,7 @@
         <activity android:name=".PubActivity"></activity>
         <activity android:name=".SelectedNetworkActivity"></activity>
         <activity android:name=".CreateNetworkActivity"></activity>
-
+        <activity android:name=".SelectedShopActivity"></activity>
 
     </application>
 
