@@ -22,6 +22,7 @@
     <string name="buttonNetworkJoined">Rejoints</string>
     <string name="buttonNetworkConfirm">Valider</string>
     <string name="buttonNetworkSend">Envoyer</string>
+    <string name="buttonNetworkCreated">Créés</string>
 
     <!-- boutons réso select-->
 
@@ -63,10 +64,10 @@
 
 
     <!--AlertDialog MainAcitvity-->
-    <string name="dialog_message">Cette action est irreversible</string>
-    <string name="dialog_title">Etes vous sur ?</string>
-    <string name="ok">Valider</string>
-    <string name="no">Annuler</string>
+    <string name="dialog_messageMain">Vos informations personnelles ne pourront plus être modifiées.\nVos centre d'interêts pourront être changés dans l'onglet "Profil".</string>
+    <string name="dialog_titleMain">Etes vous sur ?</string>
+    <string name="okMain">Valider</string>
+    <string name="noMain">Annuler</string>
 
 
 

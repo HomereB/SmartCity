@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.homre.smartcity.R;
 
-public class View_Holder_Shops extends RecyclerView.ViewHolder {
+public class View_Holder_Shops extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         CardView cv;
         TextView nom;
@@ -16,8 +16,9 @@ public class View_Holder_Shops extends RecyclerView.ViewHolder {
         TextView categorie;
         TextView coordonnees;
         ImageView image;
+        RecyclerViewClickListener rvcl;
 
-        View_Holder_Shops(View itemView) {
+        View_Holder_Shops(View itemView,RecyclerViewClickListener listener) {
                 super(itemView);
                 cv = (CardView) itemView.findViewById(R.id.cardViewShop);
                 nom = (TextView) itemView.findViewById(R.id.textViewShopName);
@@ -25,7 +26,14 @@ public class View_Holder_Shops extends RecyclerView.ViewHolder {
                 adresse = (TextView) itemView.findViewById(R.id.textViewShopAdresse);
                 coordonnees = (TextView) itemView.findViewById(R.id.textViewShopCoordonees);
                 image = (ImageView) itemView.findViewById(R.id.imageViewShop);
+                rvcl = listener;
+                itemView.setOnClickListener(this);
         }
 
 
+
+        @Override
+        public void onClick(View view) {
+                rvcl.onClick(view,getAdapterPosition());
+        }
 }

@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 
                     // 2. Chain together various setter methods to set the dialog characteristics
-                    builder.setMessage(R.string.dialog_message)
-                            .setTitle(R.string.dialog_title)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    builder.setMessage(R.string.dialog_messageMain)
+                            .setTitle(R.string.dialog_titleMain)
+                            .setPositiveButton(R.string.okMain, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             })
-                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.noMain, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 

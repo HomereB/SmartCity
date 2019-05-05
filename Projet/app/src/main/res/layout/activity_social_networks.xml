@@ -21,15 +21,22 @@
                 android:id="@+id/buttonNetworkAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="10"
                 android:text="@string/buttonNetworkList" />
 
             <Button
                 android:id="@+id/buttonNetworkJoined"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="10"
                 android:text="@string/buttonNetworkJoined" />
+
+            <Button
+                android:id="@+id/buttonNetworkCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/buttonNetworkCreated" />
 
             <Button
                 android:id="@+id/buttonNetworkCreate"

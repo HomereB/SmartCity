@@ -20,18 +20,21 @@ public class Adapter_Shops extends RecyclerView.Adapter<View_Holder_Shops>{
         ArrayList<Commerces> list ;
         ArrayList<Bitmap> imgList;
         Context context;
+        RecyclerViewClickListener listener;
 
-        public Adapter_Shops(ArrayList<Commerces> list, ArrayList<Bitmap> imgList, Context context) {
+
+    public Adapter_Shops(ArrayList<Commerces> list, ArrayList<Bitmap> imgList, Context context,RecyclerViewClickListener rvcl) {
             this.list = list;
             this.imgList = imgList;
             this.context = context;
+            this.listener = rvcl;
         }
 
         @Override
         public View_Holder_Shops onCreateViewHolder(ViewGroup parent, int viewType) {
             //Inflate the layout, initialize the View Holder
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_item_list, parent, false);
-            View_Holder_Shops holder = new View_Holder_Shops(v);
+            View_Holder_Shops holder = new View_Holder_Shops(v,listener);
             return holder;
         }
 

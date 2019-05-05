@@ -39,7 +39,9 @@ import com.example.homre.smartcity.BDD.CategorieSQL;
 import com.example.homre.smartcity.BDD.Commerces;
 import com.example.homre.smartcity.BDD.CommercesSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Shops;
+import com.example.homre.smartcity.RecyclerViewRessources.RecyclerViewClickListener;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -231,7 +233,24 @@ public class ShopActivity extends FragmentActivity {
 
             Log.i("smart",""+bitmaps.size());
             RecyclerView rv = findViewById(R.id.RVshops);
-            Adapter_Shops adapter = new Adapter_Shops(commerces,bitmaps,getApplication());
+            RecyclerViewClickListener listener = (v, position) -> {
+                Intent i = new Intent(getApplicationContext(),SelectedShopActivity.class);
+                i.putExtra("idShop",commerces.get(position).getId());
+                i.putExtra("nameShop",commerces.get(position).getNom());
+                i.putExtra("categoryShop",commerces.get(position).getNomCategorie());
+                i.putExtra("descritpionShop",commerces.get(position).getDescription());
+                i.putExtra("adressShop",commerces.get(position).getAdresse());
+                i.putExtra("latitudeShop",commerces.get(position).getLatitude());
+                i.putExtra("longitudeShop",commerces.get(position).getLongitude());
+                i.putExtra("cityShop",commerces.get(position).getVille());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmaps.get(position).compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                i.putExtra("imageShop",byteArray);
+
+                startActivity(i);
+            };
+            Adapter_Shops adapter = new Adapter_Shops(commerces,bitmaps,getApplication(),listener);
             rv.setAdapter(adapter);
             rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             Log.i("smart",""+bitmaps.size());
