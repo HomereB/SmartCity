@@ -64,7 +64,7 @@
 
 
     <!--AlertDialog MainAcitvity-->
-    <string name="dialog_messageMain">Vos informations personnelles ne pourront plus être modifiées.\nVos centre d'interêts pourront être changés dans l'onglet "Profil".</string>
+    <string name="dialog_messageMain">Vos informations personnelles ne pourront plus etre modifiees.\nVos centre d interets pourront etre changes dans l onglet Profil.</string>
     <string name="dialog_titleMain">Etes vous sur ?</string>
     <string name="okMain">Valider</string>
     <string name="noMain">Annuler</string>
