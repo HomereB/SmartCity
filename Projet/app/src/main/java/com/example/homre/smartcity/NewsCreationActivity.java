@@ -1,4 +1,9 @@
 package com.example.homre.smartcity;
 
-public class NewsCreationActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class NewsCreationActivity extends AppCompatActivity {
+
+
+
 }

@@ -19,7 +19,7 @@
             android:text="@string/txtCNewsTitle" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editTextCNewsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +34,7 @@
             android:text="@string/txtCNewsCity" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editTextCNewsCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -49,7 +49,7 @@
             android:text="@string/txtCNewsDate" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editTextCNewsDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -63,7 +63,7 @@
             android:text="@string/txtCNewsText" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/editTextCNewsDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -78,7 +78,7 @@
             android:text="@string/txtCNewsImage" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewCNewsImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars[3]" />
@@ -93,14 +93,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/buttonCNewsAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/buttonCNewsAdd" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/buttonCNewsCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

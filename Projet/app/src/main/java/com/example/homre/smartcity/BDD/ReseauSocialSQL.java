@@ -77,4 +77,19 @@ public class ReseauSocialSQL {
         return true;
     }
 
+    public static ArrayList<String> getUsersFromReseaux(int idReseau){
+        ArrayList<String> members = new ArrayList<String>();
+        return members;
+
+    }
+
+    public static boolean deleteReseau(int idReseau){
+        return true;
+
+    }
+
+    public static boolean deleteMember(String idMember, int idReseau){
+        return true;
+
+    }
 }

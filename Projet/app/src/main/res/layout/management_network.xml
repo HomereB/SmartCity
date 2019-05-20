@@ -11,7 +11,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewMNetworkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewMNetworkMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="30dp"
@@ -22,12 +28,13 @@
             android:layout_height="20dp" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVMNetworkMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/member_item_list" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewMNetworkPendingMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="30dp"
@@ -38,6 +45,7 @@
             android:layout_height="20dp" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RVMNetworkPendingMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/member_item_list">
@@ -49,7 +57,7 @@
             android:layout_height="100dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonMNetworkDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/buttonMNetworkSuppr" />
