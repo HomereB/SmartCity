@@ -29,6 +29,11 @@
     <string name="buttonNetworkSelectedJoin">Rejoindre</string>
     <string name="buttonNetworkSelectedQuit">Quitter</string>
 
+    <!-- boutons management réso-->
+
+    <string name="buttonMNetworkSuppr" >Supprimer Reseau</string>
+
+
     <!-- boutons magasins-->
 
     <string name="buttonShopAlphabet">Annuaire</string>
@@ -38,8 +43,13 @@
 
     <string name="buttonProfilValider">Valider</string>
 
+    <!-- boutons création news-->
+    <string name="buttonCNewsAdd">Ajouter</string>
+    <string name="buttonCNewsCancel">Annuler</string>
 
-                                                                <!--    TEXTES    -->
+
+
+    <!--    TEXTES    -->
 
     <!-- Profil -->
 
@@ -68,6 +78,17 @@
     <string name="dialog_titleMain">Etes vous sur ?</string>
     <string name="okMain">Valider</string>
     <string name="noMain">Annuler</string>
+
+    <!--Management réso-->
+    <string name="txtMNetworkMembers" >Membres  :</string>
+    <string name="txtMNetworkPendingMembers" >En attente :</string>
+
+    <!--News-->
+    <string name="txtCNewsTitle">Titre :</string>
+    <string name="txtCNewsCity">Ville :</string>
+    <string name="txtCNewsDate">Date :</string>
+    <string name="txtCNewsText">Description :</string>
+    <string name="txtCNewsImage">Image :</string>
 
 
 
