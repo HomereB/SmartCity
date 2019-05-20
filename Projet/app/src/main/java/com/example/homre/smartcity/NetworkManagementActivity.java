@@ -81,16 +81,14 @@ public class NetworkManagementActivity extends AppCompatActivity {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
             ArrayList<String> members;
-
             Log.e("smart","all");
-            members = ReseauSocialSQL.getUsersFromReseaux(id);
+            members = ReseauSocialSQL.getRequestFromReseaux(id);
             return members;
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<String> members) {
             int i = 1;
-
             RecyclerView rv = findViewById(R.id.RVMNetworkMembers);
             LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
             llm.setOrientation(LinearLayoutManager.VERTICAL);

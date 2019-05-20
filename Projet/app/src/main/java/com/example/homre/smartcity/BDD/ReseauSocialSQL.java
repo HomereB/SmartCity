@@ -102,6 +102,21 @@ public class ReseauSocialSQL {
         return stringArrayList;
     }
 
+    public static ArrayList<String> getRequestFromReseaux(int idReseau){
+        ArrayList<String> stringArrayList=new ArrayList<>();
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("request.php?idReseau="+idReseau);
+        if (jsonArray!=null){
+            try{
+                for (int i=0;i<jsonArray.length();i++){
+                    stringArrayList.add(jsonArray.getJSONObject(i).getString("idUser"));
+                }
+            }catch (JSONException e){
+                Log.e("json",e.toString());
+            }
+        }
+        return stringArrayList;
+    }
+
     public static boolean requestReseauSocial(int idReseau, String idUser){
         JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialRequest.php?idReseau="+idReseau+"&pseudo="+idUser);
         return true;

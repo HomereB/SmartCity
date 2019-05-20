@@ -1,6 +1,7 @@
 package com.example.homre.smartcity.RecyclerViewRessources;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
     @Override
     public View_Holder_Network_Management onCreateViewHolder(ViewGroup parent, int viewType) {
         //Inflate the layout, initialize the View Holder
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.member_item_list, parent, false);
         View_Holder_Network_Management holder = new View_Holder_Network_Management(v);
         return holder;
     }
@@ -45,13 +46,23 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
             View.OnClickListener blub = v -> {
                 ReseauSocialSQL.deleteMember(holder.nom.getText().toString(),idReso);
             };
-            holder.bouton.setOnClickListener(blub);
+            holder.boutonReject.setOnClickListener(blub);
+            View.OnClickListener blib = v -> {
+                ReseauSocialSQL.deleteMember(holder.nom.getText().toString(),idReso);
+            };
+            holder.boutonPromote.setOnClickListener(blib);
         }
         if(type == 1){
             View.OnClickListener blub = v -> {
-                ReseauSocialSQL.insertReseauUser(holder.nom.getText().toString(),idReso);
+                ReseauSocialSQL.checkRequest(idReso, holder.nom.getText().toString(),true);
             };
-            holder.bouton.setOnClickListener(blub);
+            holder.boutonReject.setOnClickListener(blub);
+            View.OnClickListener blib = v -> {
+                ReseauSocialSQL.checkRequest(idReso, holder.nom.getText().toString(),false);
+            };
+            holder.boutonPromote.setOnClickListener(blib);
+            Drawable icon = context.getDrawable(R.mipmap.accept);
+            holder.boutonPromote.setBackground(icon);
         }
     }
 
