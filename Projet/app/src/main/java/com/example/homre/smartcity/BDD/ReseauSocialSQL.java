@@ -77,19 +77,40 @@ public class ReseauSocialSQL {
         return true;
     }
 
-    public static ArrayList<String> getUsersFromReseaux(int idReseau){
-        ArrayList<String> members = new ArrayList<String>();
-        return members;
-
-    }
-
     public static boolean deleteReseau(int idReseau){
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("deleteReseauSocial.php?idReseau="+idReseau);
         return true;
-
     }
 
     public static boolean deleteMember(String idMember, int idReseau){
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("deleteUserReseau.php?idReseau="+idReseau+"&idUser="+idMember);
         return true;
-
     }
+
+    public static ArrayList<String> getUsersFromReseaux(int idReseau){
+        ArrayList<String> stringArrayList=new ArrayList<>();
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("reseauxUsers.php?idReseau="+idReseau);
+        if (jsonArray!=null){
+            try{
+                for (int i=0;i<jsonArray.length();i++){
+                    stringArrayList.add(jsonArray.getJSONObject(i).getString("idUser"));
+                }
+            }catch (JSONException e){
+                Log.e("json",e.toString());
+            }
+        }
+        return stringArrayList;
+    }
+
+    public static boolean requestReseauSocial(int idReseau, String idUser){
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialRequest.php?idReseau="+idReseau+"&pseudo="+idUser);
+        return true;
+    }
+
+    public static boolean checkRequest(int idReseau,String idUser, boolean accepted){
+        //if accepted on add au reseau
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("checkRequest.php?idReseau="+idReseau+"&pseudo="+idUser+"&accepted="+accepted);
+        return true;
+    }
+
 }

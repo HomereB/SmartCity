@@ -22,6 +22,7 @@ public class Actualite {
     private String texte;
     private String img;
     private String categorie;
+    private byte[] imgData;
 
     public Actualite(JSONObject data){
         try{
@@ -37,6 +38,16 @@ public class Actualite {
         }catch (ParseException e){
             Log.e("json","error parsing data : "+e.toString());
         }
+    }
+
+    public Actualite(int identifiant, String town, Date d, String title, String txt, byte[] image, String cat){
+        id=identifiant;
+        ville=town;
+        date=d;
+        titre=title;
+        texte=txt;
+        imgData=image;
+        categorie=cat;
     }
 
     public int getId(){
@@ -64,4 +75,8 @@ public class Actualite {
     }
 
     public String getCategorie() {return categorie;}
+
+    public byte[] getImgData() {
+        return imgData;
+    }
 }
