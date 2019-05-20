@@ -102,4 +102,15 @@ public class ReseauSocialSQL {
         return stringArrayList;
     }
 
+    public static boolean requestReseauSocial(int idReseau, String idUser){
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("insertReseauSocialRequest.php?idReseau="+idReseau+"&pseudo="+idUser);
+        return true;
+    }
+
+    public static boolean checkRequest(int idReseau,String idUser, boolean accepted){
+        //if accepted on add au reseau
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("checkRequest.php?idReseau="+idReseau+"&pseudo="+idUser+"&accepted="+accepted);
+        return true;
+    }
+
 }
