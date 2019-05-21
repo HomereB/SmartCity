@@ -40,6 +40,7 @@ public class SelectedNetworkActivity extends AppCompatActivity {
     TextView tvName;
     TextView tvOwner;
     TextView tvPrivacy;
+
     int id;
 
     static final String PREFS_NAME = "User";
@@ -70,7 +71,64 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
         String username = user.getString("username", "Name");
 
+
+
+
         //Button valider
+        Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
+
+        if(username==tvOwner.getText())
+        {
+            rejoindre.setText("Gerer");
+        }
+        else{
+            if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+            {
+                rejoindre.setText("Quitter");
+
+            }
+            else
+            {
+                rejoindre.setText("Rejoindre");
+            }
+        }
+
+        rejoindre.setOnClickListener(v -> {
+            if(username==tvOwner.getText())
+            {
+                Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
+                j.putExtra("idNetwork", id);
+                j.putExtra("nameNetwork",tvName.getText());
+                startActivity(j);
+            }
+            else{
+                if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+                {
+                    Intent j = new Intent(getApplicationContext(),NetworkActivity.class);
+                    ReseauSocialSQL.deleteMember(username,id);
+                    Toast.makeText(this, "vous avez quitte le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
+
+                    startActivity(j);
+                }
+                else
+                {
+                    if(tvPrivacy.getText().toString()== getResources().getString(R.string.txtNetworkPublic))
+                    {
+                        ReseauSocialSQL.insertReseauUser(username,id);
+                        Toast.makeText(this, "vous avez rejoint le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
+
+                    }
+                    else
+                    {
+                        ReseauSocialSQL.requestReseauSocial(id,username);
+                        Toast.makeText(this, "Une requete a ete envoyee a l'administrateur du reseau", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        });
+
+        //Button envoyer
         Button envoyer = findViewById(R.id.buttonSNetworkSend);
         envoyer.setOnClickListener(v -> {
             TextView textView = findViewById(R.id.editTextSNetwork);

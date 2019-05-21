@@ -62,6 +62,7 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
             };
             holder.boutonPromote.setOnClickListener(blib);
             Drawable icon = context.getDrawable(R.mipmap.accept);
+            icon.setBounds(0,0,64,64);
             holder.boutonPromote.setBackground(icon);
         }
     }

@@ -43,7 +43,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/ButtonSNetworkJoin"
+                android:id="@+id/ButtonSNetworkManage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
