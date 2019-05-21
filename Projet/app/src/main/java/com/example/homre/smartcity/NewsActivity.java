@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.homre.smartcity.BDD.Actualite;
+import com.example.homre.smartcity.BDD.ActualiteReaderDbHelper;
 import com.example.homre.smartcity.BDD.ActualiteSQL;
 import com.example.homre.smartcity.BDD.BaseDeDonne;
 import com.example.homre.smartcity.BDD.Publicite;
@@ -58,6 +59,52 @@ public class NewsActivity extends FragmentActivity {
         } else {
             tv.setText("No network connection available.");
         }
+
+        //bind button ville
+        Button ville = findViewById(R.id.buttonNewsVille);
+        ville.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    new DownloadWebpageTask().execute("dsds");
+                } else {
+                    tv.setText("No network connection available.");
+                }
+            }
+        });
+
+        //bind button perso
+        Button perso = findViewById(R.id.buttonNewsPerso);
+        perso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Actualite> news = ActualiteReaderDbHelper.getAll(getApplicationContext());
+                ArrayList<Bitmap> bitmaps = new ArrayList<>();
+                for (Actualite a : news){
+                    byte[] tab =a.getImgData();
+                    Bitmap b =BitmapFactory.decodeByteArray(tab,0,tab.length);
+                    bitmaps.add(b);
+                }
+
+                //display des news
+                RecyclerView rv = findViewById(R.id.RVNews);
+                Adapter_News adapter = new Adapter_News(news,bitmaps,getApplication());
+                rv.setAdapter(adapter);
+                rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+        });
+
+        //bind button +
+        Button create = findViewById(R.id.buttonNewsCreate);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),NewsCreationActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
