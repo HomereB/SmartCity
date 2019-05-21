@@ -60,7 +60,7 @@ public class NavigationFragment extends Fragment {
         };
         buttonAdds.setOnClickListener(blib);
 
-        buttonProfile = (Button)view.findViewById(R.id.button5);
+        buttonProfile = (Button)view.findViewById(R.id.buttonNewsVille);
         View.OnClickListener blob = new View.OnClickListener()
         {
             public void onClick(View v) {
