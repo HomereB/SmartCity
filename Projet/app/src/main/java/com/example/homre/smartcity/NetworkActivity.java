@@ -70,6 +70,22 @@ public class NetworkActivity extends FragmentActivity{
                 }
             });
 
+        Button crees = (Button)findViewById(R.id.buttonNetworkCreated);
+
+        crees.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+
+                    new NetworkActivity.DownloadWebpageTask().execute("id");
+                } else {
+                    tv.setText("No network connection available.");
+                }
+            }
+        });
+
 
         //event listener creation
         Button creer = findViewById(R.id.buttonNetworkCreate);
@@ -93,11 +109,24 @@ public class NetworkActivity extends FragmentActivity{
             if(urls[0].equals("all")){
                 Log.e("smart","all");
                 reseauxSociaux = ReseauSocialSQL.selectAll();
-            }else{
+            }else if(urls[0].equals("id")){
                 Log.e("smart","xoxo");
                 SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
                 String id = user.getString("username","xoxo");
                 reseauxSociaux = ReseauSocialSQL.selectByUser(id);
+            }else
+            {
+                Log.e("smart","xoxo");
+                SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
+                String id = user.getString("username","xoxo");
+                reseauxSociaux = ReseauSocialSQL.selectByUser(id);
+                for(ReseauSocial rs : reseauxSociaux)
+                {
+                    if(!rs.getIdOwner().equals(id))
+                    {
+                        reseauxSociaux.remove(rs);
+                    }
+                }
             }
 
             return reseauxSociaux;

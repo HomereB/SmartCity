@@ -27,6 +27,7 @@ import com.example.homre.smartcity.RecyclerViewRessources.Adapter_SelectedNetwor
 import com.example.homre.smartcity.RecyclerViewRessources.RecyclerViewClickListener;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
@@ -34,6 +35,7 @@ import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,12 +73,20 @@ public class SelectedNetworkActivity extends AppCompatActivity {
 
         SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
         String username = user.getString("username", "Name");
+        new DownloadWebpageTask2().execute(tvName.getText().toString());
+        Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
 
-        new DownloadWebpageTask2().execute("yoooooooo");
+        rejoindre.setOnClickListener(v -> {
+            ArrayList<String> data = new ArrayList<String>();
+            data.add(tvOwner.getText().toString());
+            data.add(tvPrivacy.getText().toString());
+            Object[] azy= data.toArray();
+            String[] tab = Arrays.copyOf(azy,
+                    azy.length,
+                    String[].class);
+            new DownloadWebpageTask3().execute(tab);
 
-
-
-
+        });
 
         //Button envoyer
         Button envoyer = findViewById(R.id.buttonSNetworkSend);
@@ -139,78 +149,111 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         }
     }
 
-    private class DownloadWebpageTask2 extends AsyncTask<String, Void, ArrayList<String>> {
+    private class DownloadWebpageTask2 extends AsyncTask<String, Void, Integer> {
         @Override
-        protected ArrayList<String> doInBackground(String... urls) {
+        protected Integer doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
             Log.i("smart","DoInBackground");
-            ArrayList<String> members;
-
-            Log.e("smart","all");
-            members = ReseauSocialSQL.getUsersFromReseaux(id);
-            return members;
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(ArrayList<String> members) {
-            //Button valider
-            Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
-
+            int blub;
             SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
             String username = user.getString("username", "Name");
-            Log.i("testreseau",username);
-            Log.i("testreseau",tvOwner.getText().toString());
-
-            if(username==tvOwner.getText().toString())
+            Log.i("smart",username);
+            Log.i("smart",urls[0]);
+            Log.i("smart",Boolean.toString(urls[0].equals(username)));
+            if(username.equals(urls[0]))
             {
-                rejoindre.setText("Gerer");
+                blub=0;
             }
             else{
                 if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
                 {
-                    rejoindre.setText("Quitter");
-
+                    blub=1;
                 }
                 else
                 {
-                    rejoindre.setText("Rejoindre");
+                    blub=2;
                 }
-            }
+            }            Log.e("smart","all");
 
-            rejoindre.setOnClickListener(v -> {
-                if(username==tvOwner.getText().toString())
-                {
+            return blub;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(Integer res) {
+            //Button manage
+            Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
+
+            switch(res)
+            {
+                case 0:                    rejoindre.setText("Gerer");break;
+
+                case 1:                    rejoindre.setText("Quitter");break;
+
+                case 2:                    rejoindre.setText("Rejoindre");break;
+
+            }
+        }
+    }
+
+
+    private class DownloadWebpageTask3 extends AsyncTask<String, Void, Integer> {
+        @Override
+        protected Integer doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+            Log.i("smart","DoInBackground");
+            int blub=-1;
+            SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
+            String username = user.getString("username", "Name");
+            if(username.equals(urls[0]))
+             {
                     Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
                     j.putExtra("idNetwork", id);
-                    j.putExtra("nameNetwork",tvName.getText());
+                    j.putExtra("nameNetwork",urls[0]);
                     startActivity(j);
                 }
                 else{
                     if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
                     {
-                        Intent j = new Intent(getApplicationContext(),NetworkActivity.class);
                         ReseauSocialSQL.deleteMember(username,id);
-                        Toast.makeText(getApplicationContext(), "vous avez quitte le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
-
-                        startActivity(j);
+                        blub = 0;
+                        finish();
                     }
                     else
                     {
-                        if(tvPrivacy.getText().toString()== getResources().getString(R.string.txtNetworkPublic))
+                        if(urls[1].equals( getResources().getString(R.string.txtNetworkPublic)))
                         {
                             ReseauSocialSQL.insertReseauUser(username,id);
-                            Toast.makeText(getApplicationContext(), "vous avez rejoint le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
+                            blub = 1;
 
                         }
                         else
                         {
                             ReseauSocialSQL.requestReseauSocial(id,username);
-                            Toast.makeText(getApplicationContext(), "Une requete a ete envoyee a l'administrateur du reseau", Toast.LENGTH_SHORT).show();
+                            blub = 2;
                         }
                     }
                 }
+            return blub;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(Integer res) {
+            //Button manage
+            Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
 
-            });
+            switch(res)
+            {
+                case 0:
+                    Toast.makeText(getApplicationContext(), "Vous avez quite le reseau", Toast.LENGTH_SHORT).show();;break;
+
+                case 1:
+                    Toast.makeText(getApplicationContext(), "Vous avez rejoint le reseau", Toast.LENGTH_SHORT).show();;break;
+
+                case 2:
+                    Toast.makeText(getApplicationContext(), "requete envoyee", Toast.LENGTH_SHORT).show();;break;
+
+            }
         }
     }
+
 }
