@@ -77,7 +77,10 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         //Button valider
         Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
 
-        if(username==tvOwner.getText())
+        Log.i("testreseau",username);
+        Log.i("testreseau",tvOwner.getText().toString());
+
+        if(username==tvOwner.getText().toString())
         {
             rejoindre.setText("Gerer");
         }
@@ -94,7 +97,7 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         }
 
         rejoindre.setOnClickListener(v -> {
-            if(username==tvOwner.getText())
+            if(username==tvOwner.getText().toString())
             {
                 Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
                 j.putExtra("idNetwork", id);

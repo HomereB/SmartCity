@@ -115,7 +115,7 @@ public class NetworkActivity extends FragmentActivity{
                 Intent i = new Intent(getApplicationContext(),SelectedNetworkActivity.class);
                 i.putExtra("idNetwork",reseauxSociaux.get(position).getId());
                 i.putExtra("ownerNetwork",reseauxSociaux.get(position).getIdOwner());
-                i.putExtra("cityNetwork",reseauxSociaux.get(position).getPrivacy());
+                i.putExtra("privacyNetwork",reseauxSociaux.get(position).getPrivacy());
                 i.putExtra("nameNetwork",reseauxSociaux.get(position).getNom());
                 startActivity(i);
             };
