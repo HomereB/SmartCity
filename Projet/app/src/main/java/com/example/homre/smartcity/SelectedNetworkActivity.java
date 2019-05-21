@@ -22,6 +22,7 @@ import com.example.homre.smartcity.BDD.PostSQL;
 import com.example.homre.smartcity.BDD.ReseauSocial;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network;
+import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network_Management;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_SelectedNetwork;
 import com.example.homre.smartcity.RecyclerViewRessources.RecyclerViewClickListener;
 
@@ -71,65 +72,11 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
         String username = user.getString("username", "Name");
 
+        new DownloadWebpageTask2().execute("yoooooooo");
 
 
 
-        //Button valider
-        Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
 
-        Log.i("testreseau",username);
-        Log.i("testreseau",tvOwner.getText().toString());
-
-        if(username==tvOwner.getText().toString())
-        {
-            rejoindre.setText("Gerer");
-        }
-        else{
-            if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
-            {
-                rejoindre.setText("Quitter");
-
-            }
-            else
-            {
-                rejoindre.setText("Rejoindre");
-            }
-        }
-
-        rejoindre.setOnClickListener(v -> {
-            if(username==tvOwner.getText().toString())
-            {
-                Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
-                j.putExtra("idNetwork", id);
-                j.putExtra("nameNetwork",tvName.getText());
-                startActivity(j);
-            }
-            else{
-                if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
-                {
-                    Intent j = new Intent(getApplicationContext(),NetworkActivity.class);
-                    ReseauSocialSQL.deleteMember(username,id);
-                    Toast.makeText(this, "vous avez quitte le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
-
-                    startActivity(j);
-                }
-                else
-                {
-                    if(tvPrivacy.getText().toString()== getResources().getString(R.string.txtNetworkPublic))
-                    {
-                        ReseauSocialSQL.insertReseauUser(username,id);
-                        Toast.makeText(this, "vous avez rejoint le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
-
-                    }
-                    else
-                    {
-                        ReseauSocialSQL.requestReseauSocial(id,username);
-                        Toast.makeText(this, "Une requete a ete envoyee a l'administrateur du reseau", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-        });
 
         //Button envoyer
         Button envoyer = findViewById(R.id.buttonSNetworkSend);
@@ -189,6 +136,81 @@ public class SelectedNetworkActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Message envoyé!", (Toast.LENGTH_SHORT)).show();
 
             }
+        }
+    }
+
+    private class DownloadWebpageTask2 extends AsyncTask<String, Void, ArrayList<String>> {
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+            Log.i("smart","DoInBackground");
+            ArrayList<String> members;
+
+            Log.e("smart","all");
+            members = ReseauSocialSQL.getUsersFromReseaux(id);
+            return members;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> members) {
+            //Button valider
+            Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
+
+            SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
+            String username = user.getString("username", "Name");
+            Log.i("testreseau",username);
+            Log.i("testreseau",tvOwner.getText().toString());
+
+            if(username==tvOwner.getText().toString())
+            {
+                rejoindre.setText("Gerer");
+            }
+            else{
+                if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+                {
+                    rejoindre.setText("Quitter");
+
+                }
+                else
+                {
+                    rejoindre.setText("Rejoindre");
+                }
+            }
+
+            rejoindre.setOnClickListener(v -> {
+                if(username==tvOwner.getText().toString())
+                {
+                    Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
+                    j.putExtra("idNetwork", id);
+                    j.putExtra("nameNetwork",tvName.getText());
+                    startActivity(j);
+                }
+                else{
+                    if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+                    {
+                        Intent j = new Intent(getApplicationContext(),NetworkActivity.class);
+                        ReseauSocialSQL.deleteMember(username,id);
+                        Toast.makeText(getApplicationContext(), "vous avez quitte le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
+
+                        startActivity(j);
+                    }
+                    else
+                    {
+                        if(tvPrivacy.getText().toString()== getResources().getString(R.string.txtNetworkPublic))
+                        {
+                            ReseauSocialSQL.insertReseauUser(username,id);
+                            Toast.makeText(getApplicationContext(), "vous avez rejoint le reseau " + tvName.getText(), Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                        {
+                            ReseauSocialSQL.requestReseauSocial(id,username);
+                            Toast.makeText(getApplicationContext(), "Une requete a ete envoyee a l'administrateur du reseau", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+            });
         }
     }
 }

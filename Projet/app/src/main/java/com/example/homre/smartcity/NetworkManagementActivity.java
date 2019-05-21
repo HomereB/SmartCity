@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
 import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network_Management;
@@ -45,7 +46,7 @@ public class NetworkManagementActivity extends AppCompatActivity {
         supprNetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReseauSocialSQL.deleteReseau(id);
+                new DownloadWebpageTask3().execute("ntm");
             }
         });
 
@@ -95,6 +96,21 @@ public class NetworkManagementActivity extends AppCompatActivity {
             rv.setLayoutManager(llm);
             Adapter_Network_Management adapter = new Adapter_Network_Management(members,i,id,getApplicationContext());
             rv.setAdapter(adapter);
+        }
+    }
+
+    private class DownloadWebpageTask3 extends AsyncTask<String, Void, ArrayList<String>> {
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+            Log.i("smart","DoInBackground");
+            ReseauSocialSQL.deleteReseau(id);
+
+            return null;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> members) {
         }
     }
 
