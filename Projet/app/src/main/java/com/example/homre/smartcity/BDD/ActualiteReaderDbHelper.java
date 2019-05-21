@@ -104,7 +104,7 @@ public class ActualiteReaderDbHelper extends SQLiteOpenHelper {
                 String texte=cursor.getString(cursor.getColumnIndex(ActualiteReaderContract.ActualiteEntry.COLUMN_NAME_DESCRIPTION));
                 byte[] image=cursor.getBlob(cursor.getColumnIndex(ActualiteReaderContract.ActualiteEntry.COLUMN_NAME_IMG));
 
-                Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(d);
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(d);
                 items.add(new Actualite((int)itemId,ville,date,titre,texte,image,null));
             }catch (ParseException e){
                 Log.e("json","error parsing data : "+e.toString());
