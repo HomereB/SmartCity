@@ -40,49 +40,40 @@ public class NetworkActivity extends FragmentActivity{
 
         //event listener annuaire
         Button tous = (Button)findViewById(R.id.buttonNetworkAll);
-        tous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    new NetworkActivity.DownloadWebpageTask().execute("all");
-                } else {
-                    tv.setText("No network connection available.");
-                }
+        tous.setOnClickListener(v -> {
+            ConnectivityManager connMgr13 = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo13 = connMgr13.getActiveNetworkInfo();
+            if (networkInfo13 != null && networkInfo13.isConnected()) {
+                new DownloadWebpageTask().execute("all");
+            } else {
+                tv.setText("No network connection available.");
             }
         });
 
         //event listener proches
         Button rejoints = (Button)findViewById(R.id.buttonNetworkJoined);
 
-            rejoints.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                    if (networkInfo != null && networkInfo.isConnected()) {
+        rejoints.setOnClickListener(v -> {
+            ConnectivityManager connMgr12 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo12 = connMgr12.getActiveNetworkInfo();
+            if (networkInfo12 != null && networkInfo12.isConnected()) {
 
-                        new NetworkActivity.DownloadWebpageTask().execute("id");
-                    } else {
-                        tv.setText("No network connection available.");
-                    }
-                }
-            });
+                new DownloadWebpageTask().execute("id");
+            } else {
+                tv.setText("No network connection available.");
+            }
+        });
 
         Button crees = (Button)findViewById(R.id.buttonNetworkCreated);
 
-        crees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
+        crees.setOnClickListener(v -> {
+            ConnectivityManager connMgr1 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo1 = connMgr1.getActiveNetworkInfo();
+            if (networkInfo1 != null && networkInfo1.isConnected()) {
 
-                    new NetworkActivity.DownloadWebpageTask().execute("id");
-                } else {
-                    tv.setText("No network connection available.");
-                }
+                new DownloadWebpageTask().execute("id");
+            } else {
+                tv.setText("No network connection available.");
             }
         });
 
@@ -94,7 +85,6 @@ public class NetworkActivity extends FragmentActivity{
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), CreateNetworkActivity.class);
-                Log.i("smart", "la c ok");
                 startActivity(i);
             }
         });
@@ -104,38 +94,33 @@ public class NetworkActivity extends FragmentActivity{
         @Override
         protected ArrayList<ReseauSocial> doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
-            Log.i("smart","DoInBackground");
-            ArrayList<ReseauSocial> reseauxSociaux;
+            ArrayList<ReseauSocial> reseauxSociaux = new ArrayList<ReseauSocial>();
             if(urls[0].equals("all")){
-                Log.e("smart","all");
                 reseauxSociaux = ReseauSocialSQL.selectAll();
             }else if(urls[0].equals("id")){
-                Log.e("smart","xoxo");
                 SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
                 String id = user.getString("username","xoxo");
                 reseauxSociaux = ReseauSocialSQL.selectByUser(id);
             }else
             {
-                Log.e("smart","xoxo");
                 SharedPreferences user = getSharedPreferences(ProfileActivity.PREFS_NAME,0);
                 String id = user.getString("username","xoxo");
-                reseauxSociaux = ReseauSocialSQL.selectByUser(id);
-                for(ReseauSocial rs : reseauxSociaux)
+                ArrayList<ReseauSocial> rs = ReseauSocialSQL.selectByUser(id);
+
+                for(ReseauSocial RS : rs)
                 {
-                    if(!rs.getIdOwner().equals(id))
+                    if(RS.getIdOwner().equals(id))
                     {
-                        reseauxSociaux.remove(rs);
+                        reseauxSociaux.add(RS);
                     }
                 }
             }
-
             return reseauxSociaux;
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<ReseauSocial> reseauxSociaux) {
 
-            Log.i("smart",""+reseauxSociaux.size());
             RecyclerView rv = findViewById(R.id.RVNetwork);
             LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
             llm.setOrientation(LinearLayoutManager.VERTICAL);

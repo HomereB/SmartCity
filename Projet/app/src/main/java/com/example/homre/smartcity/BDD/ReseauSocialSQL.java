@@ -130,7 +130,7 @@ public class ReseauSocialSQL {
 
     public static boolean updateOwner(int idReseau,String newOwnerId){
         //if accepted on add au reseau
-        JSONArray jsonArray = BaseDeDonne.SQLQuery("updateOwner.php?idReseau="+idReseau+"&pseudo="+newOwnerId);
+        JSONArray jsonArray = BaseDeDonne.SQLQuery("updateOwnerReseau.php?idReseau="+idReseau+"&pseudo="+newOwnerId);
         return true;
     }
 }

@@ -47,6 +47,6 @@ public class ReseauSocial {
     }
 
     public String getPrivacy() {if (isPublic)
-                                    return "public";
-                                return "prive";}
+                                    return "Public";
+                                return "Prive";}
 }

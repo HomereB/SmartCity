@@ -2,6 +2,7 @@ package com.example.homre.smartcity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import com.example.homre.smartcity.RecyclerViewRessources.Adapter_Network_Manage
 import java.util.ArrayList;
 
 public class NetworkManagementActivity extends AppCompatActivity {
+    static final String PREFS_NAME = "User";
 
     private TextView name;
     private int id;
@@ -28,11 +30,11 @@ public class NetworkManagementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.management_network);
         name = findViewById(R.id.textViewMNetworkName);
         Intent i = getIntent();
-        name.setText(i.getStringExtra("nameNetwork"));
         id = i.getIntExtra("idNetwork", -1);
-        setContentView(R.layout.management_network);
+        name.setText(i.getStringExtra("nameNetwork"));
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -42,13 +44,15 @@ public class NetworkManagementActivity extends AppCompatActivity {
         }
 
         //event listener annuaire
-        Button supprNetwork = (Button)findViewById(R.id.buttonNetworkAll);
-        supprNetwork.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DownloadWebpageTask3().execute("ntm");
-            }
-        });
+        Button supprNetwork = findViewById(R.id.buttonMNetworkDelete);
+        supprNetwork.setOnClickListener(v ->{
+
+        new DownloadWebpageTask3().execute("ntm");
+        Intent j = new Intent(this,NetworkActivity.class);
+        startActivity(j);
+    });
+
+
 
     }
 
@@ -84,13 +88,16 @@ public class NetworkManagementActivity extends AppCompatActivity {
             ArrayList<String> members;
             Log.e("smart","all");
             members = ReseauSocialSQL.getRequestFromReseaux(id);
+            SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
+            String username = user.getString("username","Name" );
+            members.remove(username);
             return members;
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<String> members) {
             int i = 1;
-            RecyclerView rv = findViewById(R.id.RVMNetworkMembers);
+            RecyclerView rv = findViewById(R.id.RVMNetworkPendingMembers);
             LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(llm);
@@ -113,5 +120,4 @@ public class NetworkManagementActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> members) {
         }
     }
-
 }

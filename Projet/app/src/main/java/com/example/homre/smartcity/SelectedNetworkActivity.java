@@ -73,19 +73,20 @@ public class SelectedNetworkActivity extends AppCompatActivity {
 
         SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
         String username = user.getString("username", "Name");
-        new DownloadWebpageTask2().execute(tvName.getText().toString());
         Button rejoindre = findViewById(R.id.ButtonSNetworkManage);
+
+        new DownloadWebpageTask2().execute(tvOwner.getText().toString());
 
         rejoindre.setOnClickListener(v -> {
             ArrayList<String> data = new ArrayList<String>();
             data.add(tvOwner.getText().toString());
             data.add(tvPrivacy.getText().toString());
+            data.add(tvName.getText().toString());
             Object[] azy= data.toArray();
             String[] tab = Arrays.copyOf(azy,
                     azy.length,
                     String[].class);
             new DownloadWebpageTask3().execute(tab);
-
         });
 
         //Button envoyer
@@ -122,21 +123,27 @@ public class SelectedNetworkActivity extends AppCompatActivity {
     private class InsertPost extends AsyncTask<String, Void, Boolean> {
         @Override
             protected Boolean doInBackground(String... urls){
-                Log.i("smart", "DoInBackground");
-
             SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
             String idUser = user.getString("username","");
             String msg = urls[0];
             int idNetwork=Integer.parseInt(urls[1]);
             DateFormat df =new SimpleDateFormat("yyyy-MM-dd+HH:mm:ss");
             Date date = new Date();
-
-            try {
-                PostSQL.insertPost(idUser, df.format(date), URLEncoder.encode(msg,"UTF-8"),idNetwork);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            ArrayList<String>membres = ReseauSocialSQL.getUsersFromReseaux(idNetwork);
+            if(membres.contains(idUser))
+            {
+                try {
+                    PostSQL.insertPost(idUser, df.format(date), URLEncoder.encode(msg,"UTF-8"),idNetwork);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return true;
             }
-            return true;
+            else
+                return false;
+
+
+
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
@@ -146,6 +153,9 @@ public class SelectedNetworkActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Message envoyé!", (Toast.LENGTH_SHORT)).show();
 
             }
+            else
+                Toast.makeText(getApplicationContext(), "Vous n\'etes pas membre du reseau", (Toast.LENGTH_SHORT)).show();
+
         }
     }
 
@@ -153,14 +163,20 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
-            Log.i("smart","DoInBackground");
+            Log.i("smart","DoInBackground2");
             int blub;
             SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
-            String username = user.getString("username", "Name");
+            String username = user.getString("username", "");
+            username.trim();
+            while(username.equals(" "))
+            {
+                username = user.getString("username", "");
+                username.trim();
+            }
             Log.i("smart",username);
             Log.i("smart",urls[0]);
             Log.i("smart",Boolean.toString(urls[0].equals(username)));
-            if(username.equals(urls[0]))
+            if(username.equals(urls[0].trim()))
             {
                 blub=0;
             }
@@ -173,7 +189,7 @@ public class SelectedNetworkActivity extends AppCompatActivity {
                 {
                     blub=2;
                 }
-            }            Log.e("smart","all");
+            }
 
             return blub;
         }
@@ -200,39 +216,47 @@ public class SelectedNetworkActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... urls) {
             // params comes from the execute() call: params[0] is the url.
-            Log.i("smart","DoInBackground");
+            Log.i("smart","DoInBackground3");
             int blub=-1;
             SharedPreferences user = getSharedPreferences(PREFS_NAME, 0);
-            String username = user.getString("username", "Name");
-            if(username.equals(urls[0]))
+            String username = user.getString("username", "");
+            while(username.equals(" "))
+            {
+                username = user.getString("username", "");
+                username.trim();
+            }
+            Log.i("smart",username);
+            Log.i("smart",urls[0]);
+            Log.i("smart",Boolean.toString(urls[0].equals(username)));
+            if(username.equals(urls[0].trim()))
              {
                     Intent j = new Intent(getApplicationContext(),NetworkManagementActivity.class);
                     j.putExtra("idNetwork", id);
-                    j.putExtra("nameNetwork",urls[0]);
+                    j.putExtra("nameNetwork",urls[2]);
                     startActivity(j);
+            }
+            else {
+                if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+                {
+                    ReseauSocialSQL.deleteMember(username,id);
+                    blub = 0;
+                    finish();
                 }
-                else{
-                    if(ReseauSocialSQL.getUsersFromReseaux(id).contains(username))
+                else
+                {
+                    if(urls[1].trim().equals( getResources().getString(R.string.txtNetworkPublic)))
                     {
-                        ReseauSocialSQL.deleteMember(username,id);
-                        blub = 0;
-                        finish();
+                        ReseauSocialSQL.insertReseauUser(username,id);
+                        blub = 1;
+
                     }
                     else
                     {
-                        if(urls[1].equals( getResources().getString(R.string.txtNetworkPublic)))
-                        {
-                            ReseauSocialSQL.insertReseauUser(username,id);
-                            blub = 1;
-
-                        }
-                        else
-                        {
-                            ReseauSocialSQL.requestReseauSocial(id,username);
-                            blub = 2;
-                        }
+                        ReseauSocialSQL.requestReseauSocial(id,username);
+                        blub = 2;
                     }
                 }
+            }
             return blub;
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -251,6 +275,7 @@ public class SelectedNetworkActivity extends AppCompatActivity {
 
                 case 2:
                     Toast.makeText(getApplicationContext(), "requete envoyee", Toast.LENGTH_SHORT).show();;break;
+                default :
 
             }
         }

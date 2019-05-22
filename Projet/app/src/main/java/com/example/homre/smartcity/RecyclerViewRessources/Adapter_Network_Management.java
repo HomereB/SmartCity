@@ -2,7 +2,10 @@ package com.example.homre.smartcity.RecyclerViewRessources;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +13,12 @@ import android.view.ViewGroup;
 import com.example.homre.smartcity.BDD.Post;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
 import com.example.homre.smartcity.R;
+import com.example.homre.smartcity.SelectedNetworkActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holder_Network_Management>{
 
@@ -42,29 +47,25 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
         holder.nom.setText(list.get(position));
-        if(type == 0){
-            View.OnClickListener blub = v -> {
-                ReseauSocialSQL.deleteMember(holder.nom.getText().toString(),idReso);
-            };
-            holder.boutonReject.setOnClickListener(blub);
-            View.OnClickListener blib = v -> {
-                ReseauSocialSQL.deleteMember(holder.nom.getText().toString(),idReso);
-            };
-            holder.boutonPromote.setOnClickListener(blib);
-        }
-        if(type == 1){
-            View.OnClickListener blub = v -> {
-                ReseauSocialSQL.checkRequest(idReso, holder.nom.getText().toString(),true);
-            };
-            holder.boutonReject.setOnClickListener(blub);
-            View.OnClickListener blib = v -> {
-                ReseauSocialSQL.checkRequest(idReso, holder.nom.getText().toString(),false);
-            };
-            holder.boutonPromote.setOnClickListener(blib);
-            Drawable icon = context.getDrawable(R.mipmap.accept);
+
+        ArrayList<String> data = new ArrayList<String>();
+        data.add(holder.nom.getText().toString());
+        data.add(Integer.toString(idReso));
+        data.add(Integer.toString(type));
+        Object[] azy= data.toArray();
+        String[] tab = Arrays.copyOf(azy,
+                azy.length,
+                String[].class);
+        holder.boutonReject.setOnClickListener(v -> {
+            new DownloadWebpageTask2().execute(tab);
+        });
+        holder.boutonPromote.setOnClickListener(v -> {
+            new DownloadWebpageTask().execute(tab);
+        });
+/*            Drawable icon = context.getDrawable(R.mipmap.accept);
             icon.setBounds(0,0,64,64);
-            holder.boutonPromote.setBackground(icon);
-        }
+            holder.boutonPromote.setBackground(icon);*/
+
     }
 
 
@@ -72,5 +73,46 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
     public int getItemCount() {
         //returns the number of elements the RecyclerView will display
         return list.size();
+    }
+
+    private class DownloadWebpageTask extends AsyncTask<String, Void, ArrayList<String>> {
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            if(Integer.parseInt(urls[2])==0){
+                ReseauSocialSQL.updateOwner(Integer.parseInt(urls[1]),urls[0]);
+                Log.i("smart","promotion");
+
+            }
+            else {
+                ReseauSocialSQL.checkRequest(Integer.parseInt(urls[1]),urls[0],true);
+                Log.i("smart","requete  acceptee");
+
+            }
+            return null;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> ah) {
+        }
+    }
+
+    private class DownloadWebpageTask2 extends AsyncTask<String, Void, ArrayList<String>> {
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            if(Integer.parseInt(urls[2])==0){
+                ReseauSocialSQL.deleteMember(urls[0],Integer.parseInt(urls[1]));
+                Log.i("smart","membre suppr");
+            }
+            else {
+                ReseauSocialSQL.checkRequest(Integer.parseInt(urls[1]),urls[0],false);
+                Log.i("smart","requete non acceptee");
+
+            }
+            return null;
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> a) {
+        }
     }
 }

@@ -48,6 +48,8 @@ public class CreateNetworkActivity extends AppCompatActivity {
                 String[] tab= {username,city,rb.getText().toString(), nom.getText().toString()};
                 Log.i("laaaaaaaaaaa",tab[0]+" " +tab[1]+" "+tab[2]+" "+tab[3]);
                 new InsertNetwork().execute(tab);
+                Intent j = new Intent(this,NetworkActivity.class);
+                startActivity(j);
             } else {
                 //tv.setText("No network connection available.");
             }
