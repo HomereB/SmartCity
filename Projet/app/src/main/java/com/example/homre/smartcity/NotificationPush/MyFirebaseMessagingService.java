@@ -28,7 +28,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
+        //super.onMessageReceived(remoteMessage);
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
@@ -58,7 +58,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     String description = Config.content;
                     int importance = NotificationManager.IMPORTANCE_HIGH;
                     NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
-                    channel.setDescription("Game Notifications");
 
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.createNotificationChannel(channel);
@@ -67,16 +66,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 Log.e("smart","je vais la ?");
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setAutoCancel(true)
+                        .setAutoCancel(false)
                         .setContentIntent(pendingIntent)
-                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                         .setChannelId(NOTIFICATION_CHANNEL_ID)
                         .setWhen(System.currentTimeMillis());
 
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
                 // notificationId is a unique int for each notification that you must define
-                notificationManager.notify(101, notificationBuilder.build());
+                notificationManager.notify(1, notificationBuilder.build());
             }
 
         }
