@@ -39,16 +39,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             Map<String, String> data = remoteMessage.getData();
             Config.title = data.get("title");
-            Config.content = data.get("content");
-            Config.imageUrl = data.get("imageUrl");
+            //Config.content = data.get("content");
+            //Config.imageUrl = data.get("imageUrl");
             Config.url = data.get("url");
             Log.e("smart",Config.url);
 
             if (remoteMessage.getData()!=null){
                 //notification
-                Intent goToUrl = new Intent(Intent.ACTION_VIEW);
-                goToUrl.setData(Uri.parse(Config.url));
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, goToUrl,PendingIntent.FLAG_UPDATE_CURRENT);
+                Intent goToUrl = new Intent(Intent.ACTION_VIEW,Uri.parse(Config.url));
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, goToUrl,0);
 
                 String NOTIFICATION_CHANNEL_ID = "101";
 
@@ -68,11 +67,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 Log.e("smart","je vais la ?");
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setContentTitle(Config.title)
                         .setAutoCancel(true)
-                        .setContentText(Config.content)
                         .setContentIntent(pendingIntent)
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .setChannelId(NOTIFICATION_CHANNEL_ID)
                         .setWhen(System.currentTimeMillis());
 
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
