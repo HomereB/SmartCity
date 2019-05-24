@@ -14,18 +14,13 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPagerAdds"
             android:layout_width="match_parent"
-            android:layout_height="233dp" />
+            android:layout_height="755dp" />
 
 
         <TextView
             android:id="@+id/textAdds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <VideoView
-            android:id="@+id/videoViewAdds"
-            android:layout_width="match_parent"
-            android:layout_height="210dp" />
 
         <FrameLayout
             android:id="@+id/container"
@@ -35,7 +30,7 @@
                 android:id="@+id/list"
                 class="com.example.homre.smartcity.NavigationFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"></fragment>
         </FrameLayout>
 

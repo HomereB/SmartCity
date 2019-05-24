@@ -25,23 +25,27 @@
                     android:id="@+id/textViewSShopName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textViewSShopCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textViewSShopAdress"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorText"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textViewSShopCoordinates"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorText"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
             </LinearLayout>

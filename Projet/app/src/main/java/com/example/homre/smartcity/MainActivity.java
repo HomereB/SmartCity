@@ -221,11 +221,11 @@ public class MainActivity extends AppCompatActivity {
             // onPostExecute displays the results of the AsyncTask.
             @Override
             protected void onPostExecute(ArrayList<Categorie> categories) {
-                //todo Autowrite data
                 LinearLayout ln = findViewById(R.id.listMainCategories);
                 for (Categorie c : categories) {
                     CheckBox checkBox = new CheckBox(ln.getContext());
                     checkBox.setText(c.getId() + ". " + c.getNom());
+                    checkBox.setTextColor(getResources().getColor(R.color.colorText));
                     ln.addView(checkBox);
                 }
             }

@@ -58,7 +58,6 @@ public class ProfileActivity extends FragmentActivity {
         setContentView(R.layout.activity_profile);
 
         //pseudo
-        //TODO autowrite data
         SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
         String username = user.getString("username","Name");
         TextView displayName = findViewById(R.id.textViewProfileDisplayName);
@@ -214,7 +213,6 @@ public class ProfileActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<Categorie> categories) {
-            //todo Autowrite data
             LinearLayout ln = findViewById(R.id.listProfileCategories);
             SharedPreferences user = getSharedPreferences(PREFS_NAME,0);
             int nbCat = user.getInt("nbCat",0);
@@ -225,6 +223,7 @@ public class ProfileActivity extends FragmentActivity {
             for (Categorie c : categories){
                 CheckBox checkBox = new CheckBox(ln.getContext());
                 checkBox.setText(c.getId()+". "+c.getNom());
+                checkBox.setTextColor(getResources().getColor(R.color.colorText));
                 if(catUser.contains(c)){
                     checkBox.setChecked(true);
                 }

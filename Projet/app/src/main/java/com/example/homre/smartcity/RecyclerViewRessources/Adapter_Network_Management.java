@@ -1,17 +1,23 @@
 package com.example.homre.smartcity.RecyclerViewRessources;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homre.smartcity.BDD.Post;
 import com.example.homre.smartcity.BDD.ReseauSocialSQL;
+import com.example.homre.smartcity.NetworkManagementActivity;
 import com.example.homre.smartcity.R;
 import com.example.homre.smartcity.SelectedNetworkActivity;
 
@@ -57,10 +63,57 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
                 azy.length,
                 String[].class);
         holder.boutonReject.setOnClickListener(v -> {
-            new DownloadWebpageTask2().execute(tab);
+            //rejette les invit ou supprinme l user
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setNegativeButton(R.string.noMain, null)
+                    .setPositiveButton(R.string.okMain, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new DownloadWebpageTask2().execute(tab);
+                        }
+                    });
+
+            //Integer.parseInt(urls[2])==0 => delete
+            if (Integer.parseInt(tab[2])==0){
+                //delete
+                builder.setTitle("delete User ?");
+                builder.setMessage(R.string.dialog_MNNetworkDeleteUser);
+            }else{
+                builder.setTitle("Refuser l'utilisateur ?");
+                builder.setMessage(R.string.dialog_MNNetworkRejectRequest);
+            }
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
         holder.boutonPromote.setOnClickListener(v -> {
-            new DownloadWebpageTask().execute(tab);
+
+            // update owner ou accepte la demande
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setNegativeButton(R.string.noMain, null)
+                    .setPositiveButton(R.string.okMain, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new DownloadWebpageTask().execute(tab);
+                        }
+                    });
+
+            //Integer.parseInt(urls[2])==0 => delete
+            if (Integer.parseInt(tab[2])==0){
+                //delete
+                builder.setTitle("Update Owner ?");
+                builder.setMessage(R.string.dialog_MNNetworkUpdateOwner);
+            }else{
+                builder.setTitle("Accepter la demande ?");
+                builder.setMessage(R.string.dialog_MNNetworkAcceptRequest);
+            }
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
 /*            Drawable icon = context.getDrawable(R.mipmap.accept);
             icon.setBounds(0,0,64,64);
@@ -93,6 +146,7 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<String> ah) {
+            Toast.makeText(context,"ggwp!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -113,6 +167,7 @@ public class Adapter_Network_Management  extends RecyclerView.Adapter<View_Holde
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<String> a) {
+            Toast.makeText(context,"ggwp!",Toast.LENGTH_SHORT).show();
         }
     }
 }

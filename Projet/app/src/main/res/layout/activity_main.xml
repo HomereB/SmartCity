@@ -8,19 +8,21 @@
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="725dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textViewMainName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:text="@string/txtProfilePseudo" />
 
         <EditText
             android:id="@+id/editTextMainName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
@@ -29,12 +31,14 @@
             android:id="@+id/textViewMainDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:text="@string/txtProfileDate" />
 
         <EditText
             android:id="@+id/editTextMainDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:hint="@string/txtProfileDateModel"
             android:inputType="date" />
@@ -43,6 +47,7 @@
             android:id="@+id/textViewMainCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:text="@string/txtProfileCity" />
 
         <Spinner
@@ -53,6 +58,7 @@
         <TextView
             android:id="@+id/textViewMainSex"
             android:layout_width="match_parent"
+            android:textColor="@color/colorText"
             android:layout_height="wrap_content"
             android:text="@string/txtProfileSexe" />
 
@@ -65,6 +71,7 @@
             <RadioButton
                 android:id="@+id/radioButtonMainM"
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorText"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/radioProfileSexeM" />
@@ -72,6 +79,7 @@
             <RadioButton
                 android:id="@+id/radioButtonMainF"
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorText"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/radioProfileSexeF" />
@@ -81,11 +89,12 @@
             android:id="@+id/textViewMainCategories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:text="@string/txtProfileInterest" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="167dp">
+            android:layout_height="571dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

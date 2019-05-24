@@ -25,18 +25,21 @@
                 <TextView
                     android:id="@+id/textViewSNetworkName"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorText"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textViewSNetworkOwner"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorText"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textViewSNetworkPrivacy"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorText"
                     android:layout_height="match_parent"
                     android:text="TextView" />
 
@@ -61,6 +64,7 @@
         <TextView
             android:id="@+id/textViewSNetworkMessage"
             android:layout_width="match_parent"
+            android:textColor="@color/colorText"
             android:layout_height="wrap_content"
             android:text="Message :" />
 
@@ -68,6 +72,7 @@
             android:id="@+id/editTextSNetwork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textMultiLine" />
 

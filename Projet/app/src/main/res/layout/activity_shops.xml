@@ -34,7 +34,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RVshops"
             android:layout_width="match_parent"
-            android:layout_height="410dp"
+            android:layout_height="725dp"
             android:clipToPadding="false"
             tools:listitem="@layout/shop_item_list">
 
@@ -49,7 +49,7 @@
                 android:id="@+id/list"
                 class="com.example.homre.smartcity.NavigationFragment"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"></fragment>
         </FrameLayout>
 

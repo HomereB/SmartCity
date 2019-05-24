@@ -89,8 +89,12 @@
     <string name="txtCNewsDate">Date :</string>
     <string name="txtCNewsText">Description :</string>
     <string name="txtCNewsImage">Image :</string>
+    <string name="dialog_MNetworkDeleteMessage">Vous allez supprimer le reseau social, etes vous sur de votre choix?</string>
+    <string name="dialog_MNetworkDeleteTitle">Suppression du Reseau</string>
 
-
-
+    <string name="dialog_MNNetworkUpdateOwner">Vous ne serez plus proprietaire du reseau. Etes vous sur ?</string>
+    <string name="dialog_MNNetworkDeleteUser">Vous allez supprime cet utilisateur du reseau. Etes vous sur ?</string>
+    <string name="dialog_MNNetworkRejectRequest">Refuser la demande?</string>
+    <string name="dialog_MNNetworkAcceptRequest">Accepter la demande?</string>
 
 </resources>

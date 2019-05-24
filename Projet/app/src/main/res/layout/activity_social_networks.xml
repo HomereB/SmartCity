@@ -50,8 +50,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RVNetwork"
             android:layout_width="match_parent"
-            android:layout_height="413dp"
+            android:layout_height="725dp"
             android:clipToPadding="false"
+            android:background="@color/cardview_dark_background"
             tools:listitem="@layout/network_item_list">
 
         </android.support.v7.widget.RecyclerView>

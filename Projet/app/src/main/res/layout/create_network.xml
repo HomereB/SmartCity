@@ -12,12 +12,14 @@
             android:id="@+id/textViewCNetworkName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:text="@string/txtNetworkChooseName" />
 
         <EditText
             android:id="@+id/editTextCNetworkInputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
@@ -29,6 +31,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:layout_marginVertical="30dp"
             android:text="@string/txtNetworkPrivacy" />
 
@@ -42,6 +45,7 @@
                 android:id="@+id/radioButtonCNetworkPublic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
                 android:layout_weight="1"
                 android:text="@string/txtNetworkPrivate" />
 
@@ -49,6 +53,7 @@
                 android:id="@+id/radioButtonCNetworkPrivate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
                 android:layout_weight="1"
                 android:text="@string/txtNetworkPublic" />
         </RadioGroup>

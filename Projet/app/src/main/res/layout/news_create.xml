@@ -15,6 +15,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtCNewsTitle" />
 
@@ -22,6 +23,7 @@
             android:id="@+id/editTextCNewsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
@@ -30,6 +32,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtCNewsCity" />
 
@@ -37,6 +40,7 @@
             android:id="@+id/editTextCNewsCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
@@ -45,6 +49,7 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtCNewsDate" />
 
@@ -52,6 +57,7 @@
             android:id="@+id/editTextCNewsDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="date" />
 
@@ -59,6 +65,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtCNewsText" />
 
@@ -66,6 +73,7 @@
             android:id="@+id/editTextCNewsDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
@@ -74,6 +82,7 @@
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtCNewsImage" />
 

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".NetworkManagementActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         <TextView
             android:id="@+id/textViewMNetworkName"
             android:layout_width="match_parent"
+            android:textColor="@color/colorText"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
@@ -20,6 +22,7 @@
             android:id="@+id/textViewMNetworkMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtMNetworkMembers" />
 
@@ -37,6 +40,7 @@
             android:id="@+id/textViewMNetworkPendingMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
             android:paddingTop="30dp"
             android:text="@string/txtMNetworkPendingMembers" />
 

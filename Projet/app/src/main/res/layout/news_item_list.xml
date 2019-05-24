@@ -14,6 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/mycolor"
         android:padding="16dp">
 
         <ImageView
@@ -79,4 +80,9 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"></LinearLayout>
 </android.support.v7.widget.CardView>
